@@ -255,10 +255,10 @@ body {
   letter-spacing: 0.01em;
 }
 .city-price {
-  font-size: 0.95rem;
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
   color: var(--ink);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
+  font-weight: 500;
 }
 .city-card.is-selected .city-price {
   color: var(--brand-700);
@@ -487,6 +487,119 @@ body {
   }
 }
 
+/* -----------------------------------------------------
+   SCROLL-REVEAL ANIMATIONS
+   ----------------------------------------------------- */
+.anim {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 900ms cubic-bezier(.16,.84,.24,1),
+    transform 900ms cubic-bezier(.16,.84,.24,1);
+  will-change: opacity, transform;
+}
+.anim.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variant: gentle fade only */
+.anim-fade {
+  opacity: 0;
+  transition: opacity 1100ms cubic-bezier(.16,.84,.24,1);
+}
+.anim-fade.is-visible { opacity: 1; }
+
+/* Variant: scale-in for premium cards */
+.anim-scale {
+  opacity: 0;
+  transform: scale(0.96) translateY(12px);
+  transition:
+    opacity 800ms cubic-bezier(.16,.84,.24,1),
+    transform 800ms cubic-bezier(.16,.84,.24,1);
+  will-change: opacity, transform;
+}
+.anim-scale.is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Stagger: applies progressive delay to direct children */
+.anim-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 750ms cubic-bezier(.16,.84,.24,1),
+    transform 750ms cubic-bezier(.16,.84,.24,1);
+}
+.anim-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.anim-stagger.is-visible > *:nth-child(1) { transition-delay:   0ms; }
+.anim-stagger.is-visible > *:nth-child(2) { transition-delay:  70ms; }
+.anim-stagger.is-visible > *:nth-child(3) { transition-delay: 140ms; }
+.anim-stagger.is-visible > *:nth-child(4) { transition-delay: 210ms; }
+.anim-stagger.is-visible > *:nth-child(5) { transition-delay: 280ms; }
+.anim-stagger.is-visible > *:nth-child(6) { transition-delay: 350ms; }
+.anim-stagger.is-visible > *:nth-child(7) { transition-delay: 420ms; }
+
+/* -----------------------------------------------------
+   AMBIENT HERO ORBS — slow drift
+   ----------------------------------------------------- */
+.orb-drift-a { animation: orbDriftA 18s ease-in-out infinite alternate; }
+.orb-drift-b { animation: orbDriftB 22s ease-in-out infinite alternate; }
+@keyframes orbDriftA {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(40px, 30px, 0) scale(1.08); }
+}
+@keyframes orbDriftB {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(-30px, 20px, 0) scale(1.06); }
+}
+
+/* -----------------------------------------------------
+   CTA SHIMMER (Begin Registration & Reserve Participation)
+   ----------------------------------------------------- */
+.cta-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.cta-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    rgba(255,255,255,0) 20%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0) 80%
+  );
+  transform: skewX(-20deg);
+  animation: ctaShimmer 4.5s ease-in-out 1.2s infinite;
+}
+@keyframes ctaShimmer {
+  0%   { left: -75%; }
+  60%  { left: 125%; }
+  100% { left: 125%; }
+}
+
+/* -----------------------------------------------------
+   PRICING ORB PULSE
+   ----------------------------------------------------- */
+.summary-orb-a { animation: orbPulseA 8s ease-in-out infinite alternate; }
+.summary-orb-b { animation: orbPulseB 10s ease-in-out infinite alternate; }
+@keyframes orbPulseA {
+  from { opacity: 0.6; transform: scale(1); }
+  to   { opacity: 1;   transform: scale(1.12); }
+}
+@keyframes orbPulseB {
+  from { opacity: 0.4; transform: scale(1); }
+  to   { opacity: 0.8; transform: scale(1.08); }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -495,5 +608,9 @@ body {
   }
   .marquee-track {
     animation: marqueeScroll 90s linear infinite !important;
+  }
+  .anim, .anim-fade, .anim-scale, .anim-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

@@ -238,7 +238,7 @@ function showError(msg) {
 function showSuccess(payload) {
   successSummary.innerHTML = `
     <div class="text-[11px] uppercase tracking-[0.2em] text-slate-400 mb-2 font-semibold">Registration summary</div>
-    <div class="text-lg font-semibold tracking-tight text-ink">${escapeHtml(payload.university_name)}</div>
+    <div class="font-display text-xl font-medium tracking-tight text-ink">${escapeHtml(payload.university_name)}</div>
     <div class="text-sm text-slate-600 mt-1">${escapeHtml(payload.representative_name)} · ${escapeHtml(payload.designation)}</div>
     <div class="mt-4 pt-4 border-t border-slate-100 text-sm space-y-1 text-slate-700">
       <div><span class="text-slate-500">Cities:</span> ${payload.cities_count}</div>
@@ -323,6 +323,32 @@ function escapeHtml(s) {
       next.focus();
     }
   });
+})();
+
+/* ──────────────────────────────
+   Scroll-reveal animations
+   ────────────────────────────── */
+(function initScrollReveal() {
+  const targets = document.querySelectorAll('.anim, .anim-fade, .anim-scale, .anim-stagger');
+  if (!targets.length || !('IntersectionObserver' in window)) {
+    // No IO support — just show everything
+    targets.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.14,
+    rootMargin: '0px 0px -40px 0px',
+  });
+
+  targets.forEach((el) => observer.observe(el));
 })();
 
 /* ──────────────────────────────

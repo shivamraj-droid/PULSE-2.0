@@ -9,10 +9,10 @@
   <!-- Tailwind CDN (production-friendly: swap to compiled CSS at scale) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonts: Inter Tight (single, professional, sans-serif system) -->
+  <!-- Fonts: Fraunces (editorial display) + Inter Tight (refined body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./styles.css" />
 
@@ -35,7 +35,7 @@
             paper: '#FAFBFC',
           },
           fontFamily: {
-            display: ['"Inter Tight"', 'system-ui', 'sans-serif'],
+            display: ['Fraunces', 'serif'],
             sans: ['"Inter Tight"', 'system-ui', 'sans-serif'],
           },
           boxShadow: {
@@ -64,7 +64,7 @@
           onload="this.classList.remove('hidden'); document.getElementById('brand-text').classList.add('hidden');"
           onerror="this.remove();"
         />
-        <span id="brand-text" class="text-[1.15rem] sm:text-[1.3rem] tracking-tight text-ink font-semibold">
+        <span id="brand-text" class="font-display text-[1.2rem] sm:text-[1.35rem] tracking-tight text-ink font-medium">
           Leap<span class="text-brand-600">GeeBee</span>
         </span>
         <span class="hidden lg:inline-block h-5 w-px bg-slate-300 mx-2"></span>
@@ -88,8 +88,8 @@
   <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-white to-white">
     <!-- decorative gradient mesh -->
     <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
-      <div class="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-brand-100/60 blur-3xl"></div>
-      <div class="absolute top-20 right-0 w-[420px] h-[420px] rounded-full bg-brand-200/40 blur-3xl"></div>
+      <div class="orb-drift-a absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-brand-100/60 blur-3xl"></div>
+      <div class="orb-drift-b absolute top-20 right-0 w-[420px] h-[420px] rounded-full bg-brand-200/40 blur-3xl"></div>
       <div class="absolute inset-0 opacity-[0.025]" style="background-image: radial-gradient(#0F172A 1px, transparent 1px); background-size: 22px 22px;"></div>
     </div>
 
@@ -104,9 +104,9 @@
           <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-brand-700 font-semibold">Registration Open · 2026 Edition</span>
         </div>
 
-        <h1 class="reveal mt-5 sm:mt-7 text-[2rem] sm:text-5xl lg:text-[3.75rem] leading-[1.05] tracking-[-0.02em] text-ink font-semibold">
+        <h1 class="reveal mt-5 sm:mt-7 font-display text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.04] tracking-tight text-ink font-medium">
           Pulse <span class="text-brand-600">2.0</span><span class="text-slate-400">.</span>
-          <span class="block mt-2.5 sm:mt-3.5 font-normal text-slate-600 text-base sm:text-lg lg:text-xl tracking-normal leading-snug">India's premier study abroad partner roadshow.</span>
+          <span class="block mt-2.5 sm:mt-3.5 font-sans font-normal text-slate-600 text-base sm:text-lg lg:text-xl tracking-normal leading-snug">India's premier study abroad partner roadshow.</span>
         </h1>
 
         <p class="reveal mt-5 sm:mt-6 text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
@@ -114,7 +114,7 @@
         </p>
 
         <div class="reveal mt-7 flex flex-wrap gap-3 text-sm">
-          <a href="#register" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium px-5 sm:px-6 py-3 sm:py-3.5 rounded-full transition shadow-[0_10px_30px_-10px_rgba(37,99,235,0.55)]">
+          <a href="#register" class="cta-shimmer inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium px-5 sm:px-6 py-3 sm:py-3.5 rounded-full transition shadow-[0_10px_30px_-10px_rgba(37,99,235,0.55)]">
             Begin Registration
             <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
           </a>
@@ -132,10 +132,10 @@
       </div>
 
       <!-- Trust badges card row -->
-      <div class="reveal mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl">
+      <div class="reveal anim-stagger mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl">
         <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-card">
           <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-700 font-semibold">7</div>
+            <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-700 font-display font-medium">7</div>
             <div>
               <div class="text-sm font-semibold text-ink">Curated Cities</div>
               <div class="text-xs text-slate-500">Hand-picked across India</div>
@@ -144,7 +144,7 @@
         </div>
         <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-card">
           <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-700 font-semibold">500+</div>
+            <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-700 font-display font-medium">500+</div>
             <div>
               <div class="text-sm font-semibold text-ink">Partner Network</div>
               <div class="text-xs text-slate-500">Consulting providers expected</div>
@@ -176,9 +176,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-14 sm:py-20 lg:py-24">
 
       <!-- section heading -->
-      <div class="max-w-2xl mb-10 sm:mb-12">
+      <div class="anim max-w-2xl mb-10 sm:mb-12">
         <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-brand-600 font-semibold">Step 01 — Registration</span>
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl mt-3 font-semibold tracking-tight text-ink">University participation form</h2>
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl mt-3 font-medium tracking-tight text-ink">University participation form</h2>
         <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">A short, considered registration. Detailed event information has been shared via your invitation email.</p>
       </div>
 
@@ -188,11 +188,11 @@
         <div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 space-y-6 sm:space-y-8 order-1 lg:order-none">
 
           <!-- ============ SECTION 1: UNIVERSITY DETAILS ============ -->
-          <section class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card p-5 sm:p-7 lg:p-9">
+          <section class="anim-scale bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card p-5 sm:p-7 lg:p-9">
             <header class="flex items-baseline justify-between mb-5 sm:mb-6">
               <div>
                 <div class="text-[11px] uppercase tracking-[0.2em] text-brand-600 font-semibold">Section 01</div>
-                <h3 class="text-lg sm:text-xl font-semibold mt-1.5 text-ink tracking-tight">University details</h3>
+                <h3 class="font-display text-xl sm:text-2xl font-medium mt-1.5 text-ink tracking-tight">University details</h3>
               </div>
               <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-[0.12em]">Required</div>
             </header>
@@ -247,12 +247,12 @@
           </section>
 
           <!-- ============ SECTION 2: CITY PARTICIPATION ============ -->
-          <section id="cities" class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card p-5 sm:p-7 lg:p-9 scroll-mt-24">
+          <section id="cities" class="anim-scale bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card p-5 sm:p-7 lg:p-9 scroll-mt-24">
             <header class="mb-6 sm:mb-7">
               <div class="flex items-baseline justify-between">
                 <div>
                   <div class="text-[11px] uppercase tracking-[0.2em] text-brand-600 font-semibold">Section 02</div>
-                  <h3 class="text-lg sm:text-xl font-semibold mt-1.5 text-ink tracking-tight">City participation</h3>
+                  <h3 class="font-display text-xl sm:text-2xl font-medium mt-1.5 text-ink tracking-tight">City participation</h3>
                 </div>
                 <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-[0.12em]">Multi-select</div>
               </div>
@@ -265,14 +265,14 @@
                 <div>
                   <div class="inline-flex items-center gap-2">
                     <span class="text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-brand-600 text-white font-medium">Flagship</span>
-                    <h4 class="text-base sm:text-lg font-semibold text-ink tracking-tight">Exhibition · Panel · Networking Dinner</h4>
+                    <h4 class="font-display text-lg sm:text-xl font-medium text-ink tracking-tight">Exhibition · Panel · Networking Dinner</h4>
                   </div>
                   <p class="text-sm text-slate-500 mt-1.5">Approx. 200 participants per city</p>
                 </div>
-                <span class="text-xl sm:text-2xl font-semibold text-brand-700 tabular-nums">USD 700<span class="text-xs sm:text-sm text-slate-400 ml-1 font-normal">/city</span></span>
+                <span class="font-display text-2xl font-medium text-brand-700">USD 700<span class="text-xs sm:text-sm text-slate-400 ml-1 font-normal font-sans">/city</span></span>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div class="anim-stagger grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <!-- City Card Template -->
                 <label class="city-card" data-city="Hyderabad" data-price="700" data-type="flagship">
                   <input type="checkbox" class="city-checkbox" />
@@ -280,7 +280,7 @@
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">17 July 2026</div>
-                        <div class="text-lg sm:text-xl font-semibold text-ink mt-1 tracking-tight">Hyderabad</div>
+                        <div class="font-display text-xl sm:text-2xl font-medium text-ink mt-1 tracking-tight">Hyderabad</div>
                       </div>
                       <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
                     </div>
@@ -297,7 +297,7 @@
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">25 July 2026</div>
-                        <div class="text-lg sm:text-xl font-semibold text-ink mt-1 tracking-tight">Ahmedabad</div>
+                        <div class="font-display text-xl sm:text-2xl font-medium text-ink mt-1 tracking-tight">Ahmedabad</div>
                       </div>
                       <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
                     </div>
@@ -314,7 +314,7 @@
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">31 July 2026</div>
-                        <div class="text-lg sm:text-xl font-semibold text-ink mt-1 tracking-tight">Delhi</div>
+                        <div class="font-display text-xl sm:text-2xl font-medium text-ink mt-1 tracking-tight">Delhi</div>
                       </div>
                       <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
                     </div>
@@ -331,7 +331,7 @@
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">12 August 2026</div>
-                        <div class="text-lg sm:text-xl font-semibold text-ink mt-1 tracking-tight">Chandigarh</div>
+                        <div class="font-display text-xl sm:text-2xl font-medium text-ink mt-1 tracking-tight">Chandigarh</div>
                       </div>
                       <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
                     </div>
@@ -355,21 +355,21 @@
                 <div>
                   <div class="inline-flex items-center gap-2">
                     <span class="text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-slate-900 text-white font-medium">Spotlight</span>
-                    <h4 class="text-base sm:text-lg font-semibold text-ink tracking-tight">University Spotlight · Networking Dinner</h4>
+                    <h4 class="font-display text-lg sm:text-xl font-medium text-ink tracking-tight">University Spotlight · Networking Dinner</h4>
                   </div>
                   <p class="text-sm text-slate-500 mt-1.5">Approx. 90–120 participants per city</p>
                 </div>
-                <span class="text-xl sm:text-2xl font-semibold text-brand-700 tabular-nums">USD 500<span class="text-xs sm:text-sm text-slate-400 ml-1 font-normal">/city</span></span>
+                <span class="font-display text-2xl font-medium text-brand-700">USD 500<span class="text-xs sm:text-sm text-slate-400 ml-1 font-normal font-sans">/city</span></span>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div class="anim-stagger grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <label class="city-card" data-city="Chennai" data-price="500" data-type="spotlight">
                   <input type="checkbox" class="city-checkbox" />
                   <div class="city-card-inner">
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">5 August 2026</div>
-                        <div class="text-lg sm:text-xl font-semibold text-ink mt-1 tracking-tight">Chennai</div>
+                        <div class="font-display text-xl sm:text-2xl font-medium text-ink mt-1 tracking-tight">Chennai</div>
                       </div>
                       <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
                     </div>
@@ -386,7 +386,7 @@
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">7 August 2026</div>
-                        <div class="text-lg sm:text-xl font-semibold text-ink mt-1 tracking-tight">Vijayawada</div>
+                        <div class="font-display text-xl sm:text-2xl font-medium text-ink mt-1 tracking-tight">Vijayawada</div>
                       </div>
                       <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
                     </div>
@@ -403,7 +403,7 @@
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">21 August 2026</div>
-                        <div class="text-lg sm:text-xl font-semibold text-ink mt-1 tracking-tight">Pune</div>
+                        <div class="font-display text-xl sm:text-2xl font-medium text-ink mt-1 tracking-tight">Pune</div>
                       </div>
                       <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
                     </div>
@@ -418,10 +418,10 @@
           </section>
 
           <!-- ============ SECTION 3: PANEL (conditional) ============ -->
-          <section id="panel-section" class="hidden bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card p-5 sm:p-7 lg:p-9">
+          <section id="panel-section" class="hidden anim-scale bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card p-5 sm:p-7 lg:p-9">
             <header class="mb-6">
               <div class="text-[11px] uppercase tracking-[0.2em] text-brand-600 font-semibold">Section 03</div>
-              <h3 class="text-lg sm:text-xl font-semibold mt-1.5 text-ink tracking-tight">Panel discussion <span class="text-slate-400 text-sm font-normal align-middle">(Optional)</span></h3>
+              <h3 class="font-display text-xl sm:text-2xl font-medium mt-1.5 text-ink tracking-tight">Panel discussion <span class="text-slate-400 text-sm font-normal align-middle">(Optional)</span></h3>
               <p class="text-slate-500 mt-1.5 text-xs sm:text-sm">Available for flagship cities. Nominate a representative to join our curated panel.</p>
               <p class="text-[11px] sm:text-xs text-slate-400 mt-1 italic">Note: The panel discussion is not part of the standard package.</p>
             </header>
@@ -459,17 +459,17 @@
         <!-- RIGHT (desktop) / MIDDLE (mobile): pricing summary -->
         <aside class="lg:col-span-1 lg:col-start-3 lg:row-start-1 lg:row-span-2 order-2 lg:order-none">
           <div class="lg:sticky lg:top-24">
-            <div class="relative bg-ink text-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-premium overflow-hidden">
+            <div class="anim-scale relative bg-ink text-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-premium overflow-hidden">
               <!-- decorative -->
-              <div aria-hidden="true" class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-brand-600/30 blur-3xl"></div>
-              <div aria-hidden="true" class="absolute -bottom-24 -left-10 w-56 h-56 rounded-full bg-brand-500/20 blur-3xl"></div>
+              <div aria-hidden="true" class="summary-orb-a absolute -top-20 -right-20 w-64 h-64 rounded-full bg-brand-600/30 blur-3xl"></div>
+              <div aria-hidden="true" class="summary-orb-b absolute -bottom-24 -left-10 w-56 h-56 rounded-full bg-brand-500/20 blur-3xl"></div>
 
               <div class="relative">
                 <div class="flex items-center justify-between">
                   <span class="text-[11px] uppercase tracking-[0.2em] text-brand-200 font-semibold">Live Summary</span>
                   <span class="text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-white/10 text-white/80">USD</span>
                 </div>
-                <h3 class="text-xl sm:text-2xl font-semibold mt-2 tracking-tight">Participation investment</h3>
+                <h3 class="font-display text-2xl sm:text-3xl font-medium mt-2 tracking-tight">Participation investment</h3>
 
                 <div class="mt-5 sm:mt-6">
                   <div class="text-[11px] uppercase tracking-[0.18em] text-brand-200/80 font-semibold">Selected cities</div>
@@ -501,7 +501,7 @@
                   <div class="flex items-baseline justify-between">
                     <span class="text-[11px] uppercase tracking-[0.18em] text-brand-200/80 font-semibold">Total payable</span>
                     <div class="text-right">
-                      <div id="total" class="text-2xl sm:text-3xl font-semibold tabular-nums tracking-tight">USD 0</div>
+                      <div id="total" class="font-display text-3xl sm:text-4xl font-medium tabular-nums tracking-tight">USD 0</div>
                     </div>
                   </div>
                 </div>
@@ -523,7 +523,7 @@
         <!-- BOTTOM-LEFT: declaration + submit (after summary on mobile, below sections on desktop) -->
         <div class="lg:col-span-2 lg:col-start-1 lg:row-start-2 order-3 lg:order-none">
           <!-- ============ DECLARATION ============ -->
-          <section class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card p-5 sm:p-7 lg:p-9">
+          <section class="anim-scale bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-card p-5 sm:p-7 lg:p-9">
             <label class="flex items-start gap-4 cursor-pointer group">
               <input id="declaration" required type="checkbox" class="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500 focus:ring-offset-0" />
               <span class="text-sm text-slate-700 leading-relaxed">
@@ -531,7 +531,7 @@
               </span>
             </label>
 
-            <button id="submit-btn" type="submit" class="mt-6 sm:mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-brand-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium px-6 sm:px-8 py-3.5 sm:py-4 rounded-full transition shadow-[0_15px_40px_-10px_rgba(15,23,42,0.45)] text-sm sm:text-base">
+            <button id="submit-btn" type="submit" class="cta-shimmer mt-6 sm:mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-brand-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium px-6 sm:px-8 py-3.5 sm:py-4 rounded-full transition shadow-[0_15px_40px_-10px_rgba(15,23,42,0.45)] text-sm sm:text-base">
               <span id="submit-label">Reserve Participation</span>
               <svg id="submit-arrow" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
               <svg id="submit-spinner" class="hidden animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
@@ -550,7 +550,7 @@
           <div class="mx-auto w-20 h-20 rounded-full bg-brand-600 grid place-items-center shadow-[0_20px_50px_-12px_rgba(37,99,235,0.5)] animate-success-pop">
             <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
           </div>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl mt-7 font-semibold tracking-tight text-ink">Thank you for registering.</h2>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl mt-7 font-medium tracking-tight text-ink">Thank you for registering.</h2>
           <p class="mt-5 text-slate-600 leading-relaxed">
             Thank you for expressing interest in <span class="text-ink font-medium">Pulse 2.0 — 2026 Edition</span>.
             Our team will review your registration and share confirmation and invoicing details shortly.
@@ -570,7 +570,7 @@
   <!-- ============================================================ -->
   <section id="glimpses" class="relative bg-white border-t border-slate-200/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-12 sm:pt-20 pb-8 sm:pb-12">
-      <div class="text-center">
+      <div class="anim text-center">
         <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-brand-600 font-semibold">Looking Back</span>
         <h2 class="text-xl sm:text-2xl lg:text-3xl mt-3 font-semibold tracking-tight text-ink">
           Glimpses from Pulse 1.0
@@ -602,11 +602,11 @@
   <!-- ============================================================ -->
   <!-- FOOTER                                                       -->
   <!-- ============================================================ -->
-  <footer class="bg-ink text-white">
+  <footer class="anim-fade bg-ink text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-10 sm:py-12 lg:py-14">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
         <div>
-          <div class="text-xl font-semibold tracking-tight">Leap<span class="text-brand-400">GeeBee</span></div>
+          <div class="font-display text-2xl font-medium tracking-tight">Leap<span class="text-brand-400">GeeBee</span></div>
           <p class="text-sm text-white/60 mt-3 leading-relaxed max-w-xs">Organised by Leap GeeBee — building meaningful international education partnerships across India.</p>
         </div>
         <div>
