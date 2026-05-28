@@ -158,6 +158,14 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   formError.classList.add('hidden');
 
+  const countryValue = document.getElementById('country-input').value.trim();
+  if (!countryValue) {
+    showError('Please select your country to continue.');
+    document.querySelector('[data-country-select] .country-trigger')
+      .scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
   const selected = getSelected();
   if (selected.length === 0) {
     showError('Please select at least one city to continue.');
@@ -209,7 +217,7 @@ form.addEventListener('submit', async (e) => {
     showSuccess(payload);
   } catch (err) {
     console.error(err);
-    showError('Something went wrong. Please try again or email partners@leapgeebee.com');
+    showError('Something went wrong. Please try again or email mahafrish.doctor@geebeeworld.org');
   } finally {
     setSubmitting(false);
   }
@@ -247,6 +255,75 @@ function escapeHtml(s) {
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[m]));
 }
+
+/* ──────────────────────────────
+   Country dropdown
+   ────────────────────────────── */
+(function initCountryDropdown() {
+  const root = document.querySelector('[data-country-select]');
+  if (!root) return;
+
+  const trigger     = root.querySelector('.country-trigger');
+  const panel       = root.querySelector('.country-panel');
+  const labelEl     = root.querySelector('.country-label');
+  const flagEl      = root.querySelector('.country-trigger-content .country-flag');
+  const hiddenInput = root.querySelector('input[name="country"]');
+  const options     = Array.from(root.querySelectorAll('.country-option'));
+
+  function open() {
+    root.classList.add('is-open');
+    panel.hidden = false;
+    trigger.setAttribute('aria-expanded', 'true');
+    // Focus the selected option, or the first one
+    const focusTarget = options.find((o) => o.classList.contains('is-selected')) || options[0];
+    requestAnimationFrame(() => focusTarget?.focus());
+  }
+
+  function close() {
+    root.classList.remove('is-open');
+    trigger.setAttribute('aria-expanded', 'false');
+    // Defer hidden so the fade-out animation can play
+    setTimeout(() => { if (!root.classList.contains('is-open')) panel.hidden = true; }, 220);
+  }
+
+  function selectOption(opt) {
+    options.forEach((o) => o.classList.toggle('is-selected', o === opt));
+    hiddenInput.value = opt.dataset.value;
+    labelEl.textContent = opt.querySelector('span:last-child').textContent;
+    flagEl.textContent = opt.dataset.flag || '';
+    root.classList.add('has-value');
+    close();
+    trigger.focus();
+  }
+
+  trigger.addEventListener('click', () => {
+    root.classList.contains('is-open') ? close() : open();
+  });
+
+  options.forEach((opt) => {
+    opt.addEventListener('click', () => selectOption(opt));
+  });
+
+  // Outside click
+  document.addEventListener('click', (e) => {
+    if (!root.contains(e.target)) close();
+  });
+
+  // Keyboard
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { close(); trigger.focus(); return; }
+    if (!root.classList.contains('is-open')) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const active = document.activeElement;
+      const idx = options.indexOf(active);
+      const next = e.key === 'ArrowDown'
+        ? options[(idx + 1) % options.length]
+        : options[(idx - 1 + options.length) % options.length];
+      next.focus();
+    }
+  });
+})();
 
 /* ──────────────────────────────
    Initialise

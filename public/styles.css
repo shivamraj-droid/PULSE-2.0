@@ -45,6 +45,146 @@ body {
 }
 
 /* -----------------------------------------------------
+   COUNTRY SELECT — custom dropdown
+   ----------------------------------------------------- */
+.country-select {
+  position: relative;
+}
+
+.country-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.95rem;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.75rem;
+  background: #FFFFFF;
+  font-size: 0.95rem;
+  color: #94A3B8;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 180ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+.country-trigger:hover {
+  border-color: #CBD5E1;
+}
+.country-trigger:focus-visible,
+.country-select.is-open .country-trigger {
+  outline: none;
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+.country-select.has-value .country-trigger {
+  color: var(--ink);
+}
+
+.country-trigger-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  flex: 1;
+}
+.country-flag {
+  font-size: 1.05rem;
+  line-height: 1;
+  width: 1.5rem;
+  display: inline-flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.country-trigger-content .country-flag:empty {
+  width: 0;
+  margin-right: -0.65rem;
+}
+.country-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.country-chevron {
+  width: 18px;
+  height: 18px;
+  color: #64748B;
+  flex-shrink: 0;
+  transition: transform 220ms cubic-bezier(.2,.7,.2,1);
+}
+.country-select.is-open .country-chevron {
+  transform: rotate(180deg);
+  color: var(--brand-600);
+}
+
+.country-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.85rem;
+  padding: 0.4rem;
+  box-shadow:
+    0 1px 2px rgba(15,23,42,0.06),
+    0 20px 50px -20px rgba(15,23,42,0.25);
+  max-height: 280px;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top center;
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(.2,.7,.2,1);
+  pointer-events: none;
+}
+.country-panel[hidden] { display: none; }
+.country-select.is-open .country-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.country-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.55rem;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease;
+}
+.country-option:hover,
+.country-option:focus-visible,
+.country-option.is-focused {
+  outline: none;
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+.country-option.is-selected {
+  background: var(--brand-50);
+  color: var(--brand-700);
+  font-weight: 500;
+}
+.country-option.is-selected::after {
+  content: "";
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%232563EB'><path fill-rule='evenodd' d='M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z' clip-rule='evenodd'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* -----------------------------------------------------
    CITY CARDS — the centerpiece
    ----------------------------------------------------- */
 .city-card {
