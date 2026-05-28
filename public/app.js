@@ -220,6 +220,7 @@ form.addEventListener('submit', async (e) => {
   const total = subtotal - discountAmount;
 
   const payload = {
+    secret: 'LEAP_GB_2026',
     timestamp: new Date().toISOString(),
     university_name: formData.get('university_name')?.trim(),
     representative_name: formData.get('representative_name')?.trim(),
