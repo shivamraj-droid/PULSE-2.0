@@ -411,10 +411,6 @@ body {
   will-change: transform;
 }
 
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-
 .marquee-item {
   flex: 0 0 calc((100vw - 6rem) / 3);
   max-width: 420px;
