@@ -194,8 +194,8 @@
 
       <form id="registration-form" class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
 
-        <!-- LEFT: form sections -->
-        <div class="lg:col-span-2 space-y-12">
+        <!-- TOP-LEFT: sections 01-03 (univ, cities, panel) -->
+        <div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 space-y-12 order-1 lg:order-none">
 
           <!-- ============ SECTION 1: UNIVERSITY DETAILS ============ -->
           <section class="bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-10">
@@ -464,26 +464,10 @@
             </div>
           </section>
 
-          <!-- ============ DECLARATION ============ -->
-          <section class="bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-10">
-            <label class="flex items-start gap-4 cursor-pointer group">
-              <input id="declaration" required type="checkbox" class="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500 focus:ring-offset-0" />
-              <span class="text-sm text-slate-700 leading-relaxed">
-                We understand that participation is subject to availability and final confirmation by Leap GeeBee. Our team will receive invoicing and onboarding details upon confirmation.
-              </span>
-            </label>
-
-            <button id="submit-btn" type="submit" class="mt-8 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-brand-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium px-8 py-4 rounded-full transition shadow-[0_15px_40px_-10px_rgba(15,23,42,0.45)] text-base">
-              <span id="submit-label">Reserve Participation</span>
-              <svg id="submit-arrow" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
-              <svg id="submit-spinner" class="hidden animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
-            </button>
-            <p id="form-error" class="hidden mt-4 text-sm text-red-600"></p>
-          </section>
         </div>
 
-        <!-- RIGHT: pricing summary (sticky on desktop) -->
-        <aside class="lg:col-span-1">
+        <!-- RIGHT (desktop) / MIDDLE (mobile): pricing summary -->
+        <aside class="lg:col-span-1 lg:col-start-3 lg:row-start-1 lg:row-span-2 order-2 lg:order-none">
           <div class="lg:sticky lg:top-24">
             <div class="relative bg-ink text-white rounded-3xl p-7 sm:p-8 shadow-premium overflow-hidden">
               <!-- decorative -->
@@ -545,6 +529,26 @@
             </div>
           </div>
         </aside>
+
+        <!-- BOTTOM-LEFT: declaration + submit (after summary on mobile, below sections on desktop) -->
+        <div class="lg:col-span-2 lg:col-start-1 lg:row-start-2 order-3 lg:order-none">
+          <!-- ============ DECLARATION ============ -->
+          <section class="bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-10">
+            <label class="flex items-start gap-4 cursor-pointer group">
+              <input id="declaration" required type="checkbox" class="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500 focus:ring-offset-0" />
+              <span class="text-sm text-slate-700 leading-relaxed">
+                We understand that participation is subject to availability and final confirmation by Leap GeeBee. Our team will receive invoicing and onboarding details upon confirmation.
+              </span>
+            </label>
+
+            <button id="submit-btn" type="submit" class="mt-8 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-brand-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium px-8 py-4 rounded-full transition shadow-[0_15px_40px_-10px_rgba(15,23,42,0.45)] text-base">
+              <span id="submit-label">Reserve Participation</span>
+              <svg id="submit-arrow" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
+              <svg id="submit-spinner" class="hidden animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+            </button>
+            <p id="form-error" class="hidden mt-4 text-sm text-red-600"></p>
+          </section>
+        </div>
 
       </form>
     </div>
