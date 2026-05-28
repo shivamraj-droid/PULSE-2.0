@@ -1,0 +1,327 @@
+/* =====================================================
+   Pulse 2.0 — 2026 Edition · Custom styles
+   Premium B2B aesthetic · Subtle, refined motion
+   ===================================================== */
+
+:root {
+  --brand-600: #2563EB;
+  --brand-700: #1D4ED8;
+  --brand-50:  #EFF6FF;
+  --brand-100: #DBEAFE;
+  --ink:       #0F172A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* -----------------------------------------------------
+   FORM INPUTS — refined, low-chrome
+   ----------------------------------------------------- */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.75rem;
+  background: #FFFFFF;
+  font-size: 0.95rem;
+  color: var(--ink);
+  transition: border-color 180ms ease, box-shadow 220ms ease, background 220ms ease;
+  font-family: inherit;
+}
+.form-input::placeholder {
+  color: #94A3B8;
+}
+.form-input:hover {
+  border-color: #CBD5E1;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  background: #FFFFFF;
+}
+
+/* -----------------------------------------------------
+   CITY CARDS — the centerpiece
+   ----------------------------------------------------- */
+.city-card {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  border-radius: 1.25rem;
+  transition: transform 280ms cubic-bezier(.2,.7,.2,1);
+}
+.city-card:hover { transform: translateY(-2px); }
+
+.city-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.city-card-inner {
+  position: relative;
+  padding: 1.5rem 1.5rem 1.25rem;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 1.25rem;
+  background: #FFFFFF;
+  transition: border-color 220ms ease, box-shadow 280ms ease, background 220ms ease;
+  overflow: hidden;
+}
+
+/* Subtle hover ring */
+.city-card:hover .city-card-inner {
+  border-color: #BFDBFE;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 18px 40px -12px rgba(37,99,235,0.16);
+}
+
+/* Selected state — clear, premium */
+.city-card.is-selected .city-card-inner {
+  border-color: var(--brand-600);
+  background: linear-gradient(180deg, #F5F9FF 0%, #FFFFFF 60%);
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.08),
+    0 18px 40px -14px rgba(37, 99, 235, 0.28);
+}
+
+.city-card.is-selected .city-card-inner::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-600), #60A5FA);
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
+}
+
+/* City meta row */
+.city-meta {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+.city-type {
+  color: #64748B;
+  letter-spacing: 0.02em;
+}
+.city-price {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+.city-card.is-selected .city-price {
+  color: var(--brand-700);
+}
+
+/* Check indicator */
+.check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1.5px solid #E2E8F0;
+  background: #FFFFFF;
+  color: transparent;
+  transition: all 220ms ease;
+  flex-shrink: 0;
+}
+.check-icon svg { width: 14px; height: 14px; }
+.city-card.is-selected .check-icon {
+  background: var(--brand-600);
+  border-color: var(--brand-600);
+  color: #FFFFFF;
+  transform: scale(1.05);
+}
+
+/* -----------------------------------------------------
+   RADIO PILLS (panel interest)
+   ----------------------------------------------------- */
+.radio-pill {
+  position: relative;
+  cursor: pointer;
+}
+.radio-pill input { position: absolute; opacity: 0; }
+.radio-pill > span {
+  display: block;
+  text-align: center;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 0.75rem;
+  background: #FFFFFF;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #475569;
+  transition: all 200ms ease;
+}
+.radio-pill:hover > span {
+  border-color: #BFDBFE;
+  color: var(--ink);
+}
+.radio-pill input:checked + span {
+  border-color: var(--brand-600);
+  background: var(--brand-50);
+  color: var(--brand-700);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+/* -----------------------------------------------------
+   SELECTED LIST (pricing summary)
+   ----------------------------------------------------- */
+.selected-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0.625rem;
+  animation: rowSlideIn 320ms cubic-bezier(.2,.7,.2,1);
+}
+.selected-row .city-label { color: #E2E8F0; }
+.selected-row .city-amount {
+  font-variant-numeric: tabular-nums;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+@keyframes rowSlideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -----------------------------------------------------
+   NUMBER PULSE — when total updates
+   ----------------------------------------------------- */
+.pulse-update {
+  animation: pulseUpdate 480ms cubic-bezier(.2,.7,.2,1);
+}
+@keyframes pulseUpdate {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(-4px); opacity: 0.6; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* -----------------------------------------------------
+   REVEAL ON LOAD (hero)
+   ----------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: revealUp 900ms cubic-bezier(.16,.84,.24,1) forwards;
+}
+.reveal:nth-child(1) { animation-delay: 60ms; }
+.reveal:nth-child(2) { animation-delay: 180ms; }
+.reveal:nth-child(3) { animation-delay: 280ms; }
+.reveal:nth-child(4) { animation-delay: 360ms; }
+.reveal:nth-child(5) { animation-delay: 440ms; }
+.reveal:nth-child(6) { animation-delay: 520ms; }
+
+@keyframes revealUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -----------------------------------------------------
+   SUCCESS POP
+   ----------------------------------------------------- */
+.animate-success-pop {
+  animation: successPop 600ms cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes successPop {
+  0%   { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* -----------------------------------------------------
+   Focus visible — accessibility polish
+   ----------------------------------------------------- */
+.city-checkbox:focus-visible + .city-card-inner,
+.city-card:has(.city-checkbox:focus-visible) .city-card-inner {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.18),
+    0 18px 40px -14px rgba(37, 99, 235, 0.28);
+}
+
+/* -----------------------------------------------------
+   GLIMPSES MARQUEE — infinite-loop image strip
+   ----------------------------------------------------- */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  animation: marqueeScroll 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  flex: 0 0 calc((100vw - 6rem) / 3);
+  max-width: 420px;
+  aspect-ratio: 4 / 3;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #F1F5F9;
+  box-shadow:
+    0 1px 2px rgba(15,23,42,0.04),
+    0 18px 40px -18px rgba(15,23,42,0.18);
+  position: relative;
+}
+
+.marquee-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 700ms cubic-bezier(.2,.7,.2,1);
+}
+
+.marquee-item:hover img {
+  transform: scale(1.04);
+}
+
+@keyframes marqueeScroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (max-width: 768px) {
+  .marquee-item {
+    flex-basis: 78vw;
+    max-width: 320px;
+  }
+  .marquee-track {
+    animation-duration: 30s;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .marquee-track {
+    animation: marqueeScroll 90s linear infinite !important;
+  }
+}

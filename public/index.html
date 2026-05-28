@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pulse 2.0 — 2026 Edition. India's Premier Study Abroad Partner Roadshow. By Leap GeeBee. July–August 2026." />
+  <title>Pulse 2.0 — 2026 Edition | Leap GeeBee University Partner Registration</title>
+
+  <!-- Tailwind CDN (production-friendly: swap to compiled CSS at scale) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts: Fraunces (editorial display) + Inter Tight (refined body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css" />
+
+  <script>
+    // Tailwind theme extension
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:  '#EFF6FF',
+              100: '#DBEAFE',
+              200: '#BFDBFE',
+              500: '#3B82F6',
+              600: '#2563EB',
+              700: '#1D4ED8',
+              900: '#0F172A',
+            },
+            ink: '#0F172A',
+            paper: '#FAFBFC',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'serif'],
+            sans: ['"Inter Tight"', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            card: '0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -8px rgba(15,23,42,0.08)',
+            cardHover: '0 1px 2px rgba(15,23,42,0.04), 0 18px 40px -12px rgba(37,99,235,0.18)',
+            premium: '0 30px 60px -20px rgba(15,23,42,0.18), 0 18px 36px -18px rgba(37,99,235,0.12)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans text-ink bg-white antialiased">
+
+  <!-- ============================================================ -->
+  <!-- HEADER                                                       -->
+  <!-- ============================================================ -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <!--
+          LOGO PLACEMENT
+          ───────────────────────────────────────────────────────────
+          Replace the file at /assets/leap-geebee-logo.png with the
+          actual Leap GeeBee logo (recommended: SVG or PNG @ 2x,
+          height ~40px, transparent background).
+          The placeholder text fallback below will hide automatically
+          when a logo file is detected.
+          ───────────────────────────────────────────────────────────
+        -->
+        <img
+          id="brand-logo"
+          src="./assets/leap-geebee-logo.png"
+          alt="Leap GeeBee"
+          class="h-10 sm:h-12 w-auto hidden"
+          onload="this.classList.remove('hidden'); document.getElementById('brand-text').classList.add('hidden');"
+          onerror="this.remove();"
+        />
+        <span id="brand-text" class="font-display text-[1.35rem] tracking-tight text-ink font-medium">
+          Leap<span class="text-brand-600">GeeBee</span>
+        </span>
+        <span class="hidden sm:inline-block h-5 w-px bg-slate-300 mx-2"></span>
+        <span class="hidden sm:inline-block text-sm text-slate-500 tracking-wide">Pulse 2.0 — 2026 Edition</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-7 text-sm text-slate-600">
+        <a href="#cities" class="hover:text-brand-600 transition">Cities</a>
+        <a href="#register" class="hover:text-brand-600 transition">Register</a>
+        <a href="mailto:partners@leapgeebee.com" class="hover:text-brand-600 transition">Contact</a>
+      </nav>
+      <a href="#register" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-white bg-ink hover:bg-brand-700 transition px-4 py-2 rounded-full">
+        Reserve seat
+        <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- HERO                                                          -->
+  <!-- ============================================================ -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-white to-white">
+    <!-- decorative gradient mesh -->
+    <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
+      <div class="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-brand-100/60 blur-3xl"></div>
+      <div class="absolute top-20 right-0 w-[420px] h-[420px] rounded-full bg-brand-200/40 blur-3xl"></div>
+      <div class="absolute inset-0 opacity-[0.025]" style="background-image: radial-gradient(#0F172A 1px, transparent 1px); background-size: 22px 22px;"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 pb-20 sm:pt-24 sm:pb-28 lg:pt-32 lg:pb-32">
+      <div class="max-w-3xl">
+        <!-- Eyebrow -->
+        <div class="reveal inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-brand-100 shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-60"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-600"></span>
+          </span>
+          <span class="text-xs uppercase tracking-[0.18em] text-brand-700 font-medium">Registration Open · 2026 Edition</span>
+        </div>
+
+        <h1 class="reveal mt-7 font-display text-[2.5rem] sm:text-6xl lg:text-[4.5rem] leading-[1.02] tracking-tight text-ink font-medium">
+          Pulse <span class="text-brand-600">2.0</span><span class="text-slate-400">.</span><br/>
+          <span class="italic font-light text-slate-700">India's premier study abroad partner roadshow.</span>
+        </h1>
+
+        <p class="reveal mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl leading-relaxed">
+          Reserve your university's participation across curated Indian cities and build meaningful partnerships with the country's leading study abroad consulting ecosystem.
+        </p>
+
+        <div class="reveal mt-8 flex flex-wrap gap-3 text-sm">
+          <a href="#register" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium px-6 py-3.5 rounded-full transition shadow-[0_10px_30px_-10px_rgba(37,99,235,0.55)]">
+            Begin Registration
+            <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
+          </a>
+          <a href="#cities" class="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-brand-300 text-ink font-medium px-6 py-3.5 rounded-full transition">
+            View Cities &amp; Dates
+          </a>
+        </div>
+
+        <!-- Meta line -->
+        <div class="reveal mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-500">
+          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0V11.25h18v7.5"/></svg>July – August 2026</span>
+          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>7 Cities Across India</span>
+          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>500+ Consulting Providers</span>
+        </div>
+      </div>
+
+      <!-- Trust badges card row -->
+      <div class="reveal mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl">
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-700 font-display font-medium">7</div>
+            <div>
+              <div class="text-sm font-medium text-ink">Curated Cities</div>
+              <div class="text-xs text-slate-500">Hand-picked across India</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-700 font-display font-medium">500+</div>
+            <div>
+              <div class="text-sm font-medium text-ink">Partner Network</div>
+              <div class="text-xs text-slate-500">Consulting providers expected</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-700">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+              <div class="text-sm font-medium text-ink">First-Come Basis</div>
+              <div class="text-xs text-slate-500">Limited booth allocations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- subtle bottom fade -->
+    <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FORM + CITY SELECTION + SUMMARY                              -->
+  <!-- ============================================================ -->
+  <main id="register" class="relative bg-paper">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-20 sm:py-24">
+
+      <!-- section heading -->
+      <div class="max-w-2xl mb-14">
+        <span class="text-xs uppercase tracking-[0.22em] text-brand-600 font-medium">Step 01 — Registration</span>
+        <h2 class="font-display text-3xl sm:text-5xl mt-3 tracking-tight text-ink">University participation form</h2>
+        <p class="text-slate-600 mt-4 leading-relaxed">A short, considered registration. Detailed event information has been shared via your invitation email.</p>
+      </div>
+
+      <form id="registration-form" class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
+
+        <!-- LEFT: form sections -->
+        <div class="lg:col-span-2 space-y-12">
+
+          <!-- ============ SECTION 1: UNIVERSITY DETAILS ============ -->
+          <section class="bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-10">
+            <header class="flex items-baseline justify-between mb-7">
+              <div>
+                <div class="text-xs uppercase tracking-[0.18em] text-brand-600 font-medium">Section 01</div>
+                <h3 class="font-display text-2xl mt-1.5 text-ink">University details</h3>
+              </div>
+              <div class="text-xs text-slate-400 font-medium">Required</div>
+            </header>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-slate-700 mb-2">University Name</label>
+                <input required name="university_name" type="text" placeholder="e.g. University of Edinburgh" class="form-input" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">Representative Full Name</label>
+                <input required name="representative_name" type="text" placeholder="Full name" class="form-input" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">Designation</label>
+                <input required name="designation" type="text" placeholder="e.g. Regional Director, South Asia" class="form-input" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">Official University Email</label>
+                <input required name="email" type="email" placeholder="name@university.edu" class="form-input" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">WhatsApp Number</label>
+                <input required name="whatsapp" type="tel" placeholder="+44 20 1234 5678" class="form-input" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-slate-700 mb-2">Country</label>
+                <input required name="country" type="text" placeholder="United Kingdom" class="form-input" />
+              </div>
+            </div>
+          </section>
+
+          <!-- ============ SECTION 2: CITY PARTICIPATION ============ -->
+          <section id="cities" class="bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-10 scroll-mt-24">
+            <header class="mb-8">
+              <div class="flex items-baseline justify-between">
+                <div>
+                  <div class="text-xs uppercase tracking-[0.18em] text-brand-600 font-medium">Section 02</div>
+                  <h3 class="font-display text-2xl mt-1.5 text-ink">City participation</h3>
+                </div>
+                <div class="text-xs text-slate-400 font-medium">Multi-select</div>
+              </div>
+              <p class="text-sm text-slate-500 mt-3">Select one or more cities. Book three or more to unlock a 10% partner discount.</p>
+            </header>
+
+            <!-- Flagship -->
+            <div class="mb-10">
+              <div class="flex flex-wrap items-end justify-between gap-3 mb-5">
+                <div>
+                  <div class="inline-flex items-center gap-2">
+                    <span class="text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-brand-600 text-white font-medium">Flagship</span>
+                    <h4 class="font-display text-xl text-ink">Exhibition · Panel · Networking Dinner</h4>
+                  </div>
+                  <p class="text-sm text-slate-500 mt-1.5">Approx. 200 participants per city</p>
+                </div>
+                <span class="font-display text-2xl text-brand-700">USD 700<span class="text-sm text-slate-400 ml-1">/city</span></span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- City Card Template -->
+                <label class="city-card" data-city="Hyderabad" data-price="700" data-type="flagship">
+                  <input type="checkbox" class="city-checkbox" />
+                  <div class="city-card-inner">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <div class="text-xs uppercase tracking-[0.18em] text-slate-400">17 July 2026</div>
+                        <div class="font-display text-2xl text-ink mt-1.5">Hyderabad</div>
+                      </div>
+                      <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+                    </div>
+                    <div class="city-meta">
+                      <span class="city-type">Flagship Event</span>
+                      <span class="city-price">USD 700</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="city-card" data-city="Ahmedabad" data-price="700" data-type="flagship">
+                  <input type="checkbox" class="city-checkbox" />
+                  <div class="city-card-inner">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <div class="text-xs uppercase tracking-[0.18em] text-slate-400">25 July 2026</div>
+                        <div class="font-display text-2xl text-ink mt-1.5">Ahmedabad</div>
+                      </div>
+                      <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+                    </div>
+                    <div class="city-meta">
+                      <span class="city-type">Flagship Event</span>
+                      <span class="city-price">USD 700</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="city-card" data-city="Delhi" data-price="700" data-type="flagship">
+                  <input type="checkbox" class="city-checkbox" />
+                  <div class="city-card-inner">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <div class="text-xs uppercase tracking-[0.18em] text-slate-400">31 July 2026</div>
+                        <div class="font-display text-2xl text-ink mt-1.5">Delhi</div>
+                      </div>
+                      <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+                    </div>
+                    <div class="city-meta">
+                      <span class="city-type">Flagship Event</span>
+                      <span class="city-price">USD 700</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="city-card" data-city="Chandigarh" data-price="700" data-type="flagship">
+                  <input type="checkbox" class="city-checkbox" />
+                  <div class="city-card-inner">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <div class="text-xs uppercase tracking-[0.18em] text-slate-400">12 August 2026</div>
+                        <div class="font-display text-2xl text-ink mt-1.5">Chandigarh</div>
+                      </div>
+                      <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+                    </div>
+                    <div class="city-meta">
+                      <span class="city-type">Flagship Event</span>
+                      <span class="city-price">USD 700</span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="relative my-10">
+              <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-dashed border-slate-200"></div></div>
+              <div class="relative flex justify-center"><span class="bg-white px-4 text-xs uppercase tracking-[0.2em] text-slate-400">Spotlight Series</span></div>
+            </div>
+
+            <!-- Spotlight -->
+            <div>
+              <div class="flex flex-wrap items-end justify-between gap-3 mb-5">
+                <div>
+                  <div class="inline-flex items-center gap-2">
+                    <span class="text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-slate-900 text-white font-medium">Spotlight</span>
+                    <h4 class="font-display text-xl text-ink">University Spotlight · Networking Dinner</h4>
+                  </div>
+                  <p class="text-sm text-slate-500 mt-1.5">Approx. 90–120 participants per city</p>
+                </div>
+                <span class="font-display text-2xl text-brand-700">USD 500<span class="text-sm text-slate-400 ml-1">/city</span></span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label class="city-card" data-city="Chennai" data-price="500" data-type="spotlight">
+                  <input type="checkbox" class="city-checkbox" />
+                  <div class="city-card-inner">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <div class="text-xs uppercase tracking-[0.18em] text-slate-400">5 August 2026</div>
+                        <div class="font-display text-2xl text-ink mt-1.5">Chennai</div>
+                      </div>
+                      <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+                    </div>
+                    <div class="city-meta">
+                      <span class="city-type">Spotlight Session</span>
+                      <span class="city-price">USD 500</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="city-card" data-city="Vijayawada" data-price="500" data-type="spotlight">
+                  <input type="checkbox" class="city-checkbox" />
+                  <div class="city-card-inner">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <div class="text-xs uppercase tracking-[0.18em] text-slate-400">7 August 2026</div>
+                        <div class="font-display text-2xl text-ink mt-1.5">Vijayawada</div>
+                      </div>
+                      <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+                    </div>
+                    <div class="city-meta">
+                      <span class="city-type">Spotlight Session</span>
+                      <span class="city-price">USD 500</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="city-card md:col-span-2" data-city="Pune" data-price="500" data-type="spotlight">
+                  <input type="checkbox" class="city-checkbox" />
+                  <div class="city-card-inner">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <div class="text-xs uppercase tracking-[0.18em] text-slate-400">21 August 2026</div>
+                        <div class="font-display text-2xl text-ink mt-1.5">Pune</div>
+                      </div>
+                      <span class="check-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 011.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+                    </div>
+                    <div class="city-meta">
+                      <span class="city-type">Spotlight Session</span>
+                      <span class="city-price">USD 500</span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============ SECTION 3: PANEL (conditional) ============ -->
+          <section id="panel-section" class="hidden bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-10">
+            <header class="mb-6">
+              <div class="text-xs uppercase tracking-[0.18em] text-brand-600 font-medium">Section 03</div>
+              <h3 class="font-display text-2xl mt-1.5 text-ink">Panel discussion</h3>
+              <p class="text-slate-500 mt-2 text-sm">Available for flagship cities. Nominate a representative to join our curated panel.</p>
+            </header>
+
+            <div class="space-y-5">
+              <fieldset>
+                <legend class="text-sm font-medium text-slate-700 mb-3">Interested in nominating a representative?</legend>
+                <div class="grid grid-cols-2 gap-3 max-w-sm">
+                  <label class="radio-pill">
+                    <input type="radio" name="panel_interest" value="Yes" />
+                    <span>Yes, nominate</span>
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="panel_interest" value="No" checked />
+                    <span>No, thanks</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div id="panel-details" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 mb-2">Nominee Name</label>
+                  <input name="nominee_name" type="text" placeholder="Full name" class="form-input" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 mb-2">Nominee Designation</label>
+                  <input name="nominee_designation" type="text" placeholder="e.g. Dean, International Admissions" class="form-input" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============ DECLARATION ============ -->
+          <section class="bg-white rounded-3xl border border-slate-200/80 shadow-card p-7 sm:p-10">
+            <label class="flex items-start gap-4 cursor-pointer group">
+              <input id="declaration" required type="checkbox" class="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500 focus:ring-offset-0" />
+              <span class="text-sm text-slate-700 leading-relaxed">
+                We understand that participation is subject to availability and final confirmation by Leap GeeBee. Our team will receive invoicing and onboarding details upon confirmation.
+              </span>
+            </label>
+
+            <button id="submit-btn" type="submit" class="mt-8 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-brand-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium px-8 py-4 rounded-full transition shadow-[0_15px_40px_-10px_rgba(15,23,42,0.45)] text-base">
+              <span id="submit-label">Reserve Participation</span>
+              <svg id="submit-arrow" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
+              <svg id="submit-spinner" class="hidden animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+            </button>
+            <p id="form-error" class="hidden mt-4 text-sm text-red-600"></p>
+          </section>
+        </div>
+
+        <!-- RIGHT: pricing summary (sticky on desktop) -->
+        <aside class="lg:col-span-1">
+          <div class="lg:sticky lg:top-24">
+            <div class="relative bg-ink text-white rounded-3xl p-7 sm:p-8 shadow-premium overflow-hidden">
+              <!-- decorative -->
+              <div aria-hidden="true" class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-brand-600/30 blur-3xl"></div>
+              <div aria-hidden="true" class="absolute -bottom-24 -left-10 w-56 h-56 rounded-full bg-brand-500/20 blur-3xl"></div>
+
+              <div class="relative">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs uppercase tracking-[0.22em] text-brand-200">Live Summary</span>
+                  <span class="text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-white/10 text-white/80">USD</span>
+                </div>
+                <h3 class="font-display text-3xl mt-2">Participation investment</h3>
+
+                <div class="mt-7">
+                  <div class="text-xs uppercase tracking-[0.18em] text-brand-200/80">Selected cities</div>
+                  <div id="selected-list" class="mt-3 space-y-2.5 min-h-[60px]">
+                    <div id="empty-state" class="text-sm text-white/50 italic py-3 border border-dashed border-white/15 rounded-xl text-center">
+                      No cities selected yet
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-6 pt-6 border-t border-white/10 space-y-3 text-sm">
+                  <div class="flex items-center justify-between">
+                    <span class="text-white/70">Subtotal</span>
+                    <span id="subtotal" class="font-medium tabular-nums">USD 0</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-white/70">Discount</span>
+                    <span id="discount" class="font-medium tabular-nums text-white/50">— none —</span>
+                  </div>
+                  <div id="discount-banner" class="hidden bg-brand-600/20 border border-brand-500/30 rounded-xl px-3 py-2.5 text-xs text-brand-100">
+                    <span class="font-medium">10% partner discount applied</span> · Booking 3+ cities unlocks this benefit.
+                  </div>
+                  <div id="discount-hint" class="text-xs text-white/50">
+                    Tip: Select <span id="hint-needed">3</span> or more cities to unlock <span class="text-brand-200 font-medium">10% off</span>.
+                  </div>
+                </div>
+
+                <div class="mt-6 pt-6 border-t border-white/10">
+                  <div class="flex items-baseline justify-between">
+                    <span class="text-xs uppercase tracking-[0.18em] text-brand-200/80">Total payable</span>
+                    <div class="text-right">
+                      <div id="total" class="font-display text-4xl tabular-nums">USD 0</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex items-center gap-2 text-xs text-white/50">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Invoicing &amp; payment details shared after confirmation.
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5 text-xs text-slate-500 leading-relaxed px-2">
+              Need to discuss custom partnership terms or sponsorship?
+              <a href="mailto:partners@leapgeebee.com" class="text-brand-600 hover:underline font-medium">Reach our team</a>.
+            </div>
+          </div>
+        </aside>
+
+      </form>
+    </div>
+
+    <!-- ============ SUCCESS SCREEN ============ -->
+    <div id="success-screen" class="hidden fixed inset-0 z-50 bg-gradient-to-b from-brand-50 via-white to-white overflow-y-auto">
+      <div class="min-h-screen flex items-center justify-center px-5 py-16">
+        <div class="max-w-xl w-full text-center">
+          <div class="mx-auto w-20 h-20 rounded-full bg-brand-600 grid place-items-center shadow-[0_20px_50px_-12px_rgba(37,99,235,0.5)] animate-success-pop">
+            <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h2 class="font-display text-4xl sm:text-5xl mt-8 tracking-tight text-ink">Thank you for registering.</h2>
+          <p class="mt-5 text-slate-600 leading-relaxed">
+            Thank you for expressing interest in <span class="text-ink font-medium">Pulse 2.0 — 2026 Edition</span>.
+            Our team will review your registration and share confirmation and invoicing details shortly.
+          </p>
+          <div id="success-summary" class="mt-8 inline-block text-left bg-white border border-slate-200 rounded-2xl px-6 py-5 shadow-card"></div>
+          <div class="mt-10 text-sm text-slate-500">
+            A copy will be sent to your email. For any queries —
+            <a href="mailto:partners@leapgeebee.com" class="text-brand-600 hover:underline">partners@leapgeebee.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- GLIMPSES — Pulse 1.0 marquee                                 -->
+  <!-- ============================================================ -->
+  <section id="glimpses" class="relative bg-white border-t border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-20 sm:pt-24 pb-12 sm:pb-16">
+      <div class="max-w-2xl">
+        <span class="text-xs uppercase tracking-[0.22em] text-brand-600 font-medium">Looking Back</span>
+        <h2 class="font-display text-3xl sm:text-5xl mt-3 tracking-tight text-ink">
+          Glimpses from <span class="italic font-light text-slate-700">Pulse 1.0</span>
+        </h2>
+        <p class="text-slate-600 mt-4 leading-relaxed">
+          A look back at the conversations, partnerships and moments that defined our inaugural edition across India.
+        </p>
+      </div>
+    </div>
+
+    <div class="marquee pb-20 sm:pb-24">
+      <!-- Track is duplicated for a seamless infinite loop. Keep both halves identical. -->
+      <div class="marquee-track">
+        <!-- Copy 1 -->
+        <figure class="marquee-item">
+          <img src="./assets/0A4A0920.JPG" alt="Pulse 1.0 — university partner exhibition" loading="lazy" />
+        </figure>
+        <figure class="marquee-item">
+          <img src="./assets/0A4A1070.JPG" alt="Pulse 1.0 — networking dinner" loading="lazy" />
+        </figure>
+        <figure class="marquee-item">
+          <img src="./assets/0A4A0787.JPG" alt="Pulse 1.0 — panel discussion" loading="lazy" />
+        </figure>
+        <figure class="marquee-item">
+          <img src="./assets/PHOTO-2026-05-28-17-33-29.jpg" alt="Pulse 1.0 — partner meet" loading="lazy" />
+        </figure>
+        <figure class="marquee-item">
+          <img src="./assets/image.png" alt="Pulse 1.0 — event highlights" loading="lazy" />
+        </figure>
+        <!-- Copy 2 (mirror of copy 1 for seamless wrap) -->
+        <figure class="marquee-item" aria-hidden="true">
+          <img src="./assets/0A4A0920.JPG" alt="" loading="lazy" />
+        </figure>
+        <figure class="marquee-item" aria-hidden="true">
+          <img src="./assets/0A4A1070.JPG" alt="" loading="lazy" />
+        </figure>
+        <figure class="marquee-item" aria-hidden="true">
+          <img src="./assets/0A4A0787.JPG" alt="" loading="lazy" />
+        </figure>
+        <figure class="marquee-item" aria-hidden="true">
+          <img src="./assets/PHOTO-2026-05-28-17-33-29.jpg" alt="" loading="lazy" />
+        </figure>
+        <figure class="marquee-item" aria-hidden="true">
+          <img src="./assets/image.png" alt="" loading="lazy" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER                                                       -->
+  <!-- ============================================================ -->
+  <footer class="bg-ink text-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+          <div class="font-display text-2xl">Leap<span class="text-brand-400">GeeBee</span></div>
+          <p class="text-sm text-white/60 mt-3 leading-relaxed max-w-xs">Organised by Leap GeeBee — building meaningful international education partnerships across India.</p>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-[0.2em] text-white/40">Contact</div>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li><a href="mailto:partners@leapgeebee.com" class="hover:text-brand-300 transition">partners@leapgeebee.com</a></li>
+            <li><a href="tel:+911234567890" class="hover:text-brand-300 transition">+91 (0) 12345 67890</a></li>
+            <li><a href="https://leapgeebee.com" class="hover:text-brand-300 transition">leapgeebee.com</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-[0.2em] text-white/40">Event</div>
+          <ul class="mt-4 space-y-2 text-sm text-white/70">
+            <li>Pulse 2.0 — 2026 Edition</li>
+            <li>July–August 2026 · 7 Cities</li>
+            <li>India</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+        <div>© 2026 Leap GeeBee. All rights reserved.</div>
+        <div>Powered by Leap GeeBee</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
