@@ -108,7 +108,11 @@ function updateSummary() {
     animateNumber(discountEl, '− ' + fmt(discountAmount));
     discountEl.classList.remove('text-white/50');
     discountEl.classList.add('text-brand-200');
-    discountBanner.classList.remove('hidden');
+    if (discountBanner.classList.contains('hidden')) {
+      discountBanner.classList.remove('hidden');
+      discountBanner.classList.add('discount-banner-enter');
+      setTimeout(() => discountBanner.classList.remove('discount-banner-enter'), 560);
+    }
     discountHint.classList.add('hidden');
   } else {
     animateNumber(discountEl, '— none —');
@@ -132,13 +136,49 @@ function updateSummary() {
   }
 }
 
+const PREFERS_REDUCED_MOTION = window.matchMedia &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 function animateNumber(el, newText) {
   if (el.textContent === newText) return;
+
+  const fromNum = extractNumeric(el.textContent);
+  const toNum   = extractNumeric(newText);
+
+  // If both have parseable numbers and they differ, tween between them
+  if (
+    fromNum !== null && toNum !== null && fromNum !== toNum &&
+    !PREFERS_REDUCED_MOTION
+  ) {
+    el.classList.remove('pulse-update');
+    void el.offsetWidth;
+    el.classList.add('pulse-update');
+
+    const duration = 650;
+    const start = performance.now();
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+
+    function step(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const val = Math.round(fromNum + (toNum - fromNum) * ease(t));
+      el.textContent = newText.replace(/[\d,]+/, val.toLocaleString('en-US'));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = newText;
+    }
+    requestAnimationFrame(step);
+    return;
+  }
+
+  // Fallback for non-numeric transitions (e.g. "— none —")
   el.textContent = newText;
   el.classList.remove('pulse-update');
-  // force reflow to restart animation
   void el.offsetWidth;
   el.classList.add('pulse-update');
+}
+
+function extractNumeric(text) {
+  const m = String(text).match(/([\d,]+)/);
+  return m ? parseInt(m[1].replace(/,/g, ''), 10) : null;
 }
 
 /* ──────────────────────────────
@@ -322,6 +362,58 @@ function escapeHtml(s) {
         : options[(idx - 1 + options.length) % options.length];
       next.focus();
     }
+  });
+})();
+
+/* ──────────────────────────────
+   Scroll progress bar
+   ────────────────────────────── */
+(function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  let ticking = false;
+
+  function update() {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? Math.min(scrolled / max, 1) : 0;
+    bar.style.transform = `scaleX(${progress})`;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  update();
+})();
+
+/* ──────────────────────────────
+   Magnetic CTA buttons
+   ────────────────────────────── */
+(function initMagneticButtons() {
+  if (PREFERS_REDUCED_MOTION) return;
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches) return; // skip on touch
+
+  const buttons = document.querySelectorAll('.cta-shimmer');
+  const STRENGTH = 0.22;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      btn.style.transform = `translate(${dx * STRENGTH}px, ${dy * STRENGTH}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0)';
+    });
   });
 })();
 

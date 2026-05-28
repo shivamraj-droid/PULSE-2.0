@@ -13,6 +13,25 @@
 
 html { scroll-behavior: smooth; }
 
+/* Scroll progress bar */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--brand-600), #60A5FA, var(--brand-600));
+  background-size: 200% 100%;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  z-index: 100;
+  pointer-events: none;
+  animation: scrollGradient 6s linear infinite;
+}
+@keyframes scrollGradient {
+  from { background-position: 0% 0; }
+  to   { background-position: 200% 0; }
+}
+
 body {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
@@ -279,11 +298,19 @@ body {
   flex-shrink: 0;
 }
 .check-icon svg { width: 12px; height: 12px; }
+.check-icon .check-path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  transition: stroke-dashoffset 380ms cubic-bezier(.6,.05,.2,1) 80ms;
+}
 .city-card.is-selected .check-icon {
   background: var(--brand-600);
   border-color: var(--brand-600);
   color: #FFFFFF;
   transform: scale(1.05);
+}
+.city-card.is-selected .check-icon .check-path {
+  stroke-dashoffset: 0;
 }
 
 /* -----------------------------------------------------
@@ -485,6 +512,26 @@ body {
     font-size: 0.82rem;
     padding: 0.5rem 0.65rem;
   }
+}
+
+/* -----------------------------------------------------
+   DISCOUNT BANNER POP-IN
+   ----------------------------------------------------- */
+.discount-banner-enter {
+  animation: bannerPopIn 520ms cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes bannerPopIn {
+  0%   { opacity: 0; transform: scale(0.92) translateY(4px); }
+  60%  { opacity: 1; transform: scale(1.02) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* -----------------------------------------------------
+   MAGNETIC CTA TRANSITION
+   ----------------------------------------------------- */
+.cta-shimmer {
+  transition: transform 320ms cubic-bezier(.2,.7,.2,1), background-color 200ms ease, box-shadow 200ms ease;
+  will-change: transform;
 }
 
 /* -----------------------------------------------------
