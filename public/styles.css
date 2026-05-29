@@ -140,6 +140,14 @@ body {
   color: var(--brand-600);
 }
 
+/* Lift the containing section above siblings when dropdown is open,
+   so the panel paints over Section 02 (each .anim-scale section
+   creates its own stacking context via transform). */
+section:has(.country-select.is-open) {
+  position: relative;
+  z-index: 50;
+}
+
 .country-panel {
   position: absolute;
   top: calc(100% + 0.5rem);
