@@ -16,6 +16,12 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-nuCkEIZ1VQeX
 const DISCOUNT_THRESHOLD = 3;
 const DISCOUNT_RATE = 0.10;
 
+// Availability state, populated when the user picks a country.
+// Shape: { Hyderabad: 'available', Delhi: 'waitlisted', ... }
+let availabilityMap = {};
+let currentCountry = '';
+let availabilityFetchInFlight = null;
+
 /* ──────────────────────────────
    DOM refs
    ────────────────────────────── */
@@ -52,18 +58,47 @@ const fmt = (n) => 'USD ' + n.toLocaleString('en-US', { maximumFractionDigits: 0
    ────────────────────────────── */
 cityCards.forEach((card) => {
   const checkbox = card.querySelector('.city-checkbox');
+  const waitlistCta = card.querySelector('.city-waitlist-cta');
+
   card.addEventListener('click', (e) => {
     // Avoid double-toggle when clicking the native checkbox
     if (e.target === checkbox) return;
     e.preventDefault();
+
+    // Waitlisted cities never enter the registration / payment flow.
+    // Clicking opens the modal instead.
+    if (card.classList.contains('is-waitlisted')) {
+      openWaitlistModal({
+        country: currentCountry,
+        city: card.dataset.city,
+      });
+      return;
+    }
+
     checkbox.checked = !checkbox.checked;
     card.classList.toggle('is-selected', checkbox.checked);
     updateSummary();
   });
+
   checkbox.addEventListener('change', () => {
+    if (card.classList.contains('is-waitlisted')) {
+      // Defensive: never allow waitlisted card to be checked
+      checkbox.checked = false;
+      return;
+    }
     card.classList.toggle('is-selected', checkbox.checked);
     updateSummary();
   });
+
+  if (waitlistCta) {
+    waitlistCta.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openWaitlistModal({
+        country: currentCountry,
+        city: card.dataset.city,
+      });
+    });
+  }
 });
 
 /* ──────────────────────────────
@@ -219,8 +254,18 @@ form.addEventListener('submit', async (e) => {
   const discountAmount = discountApplied ? subtotal * DISCOUNT_RATE : 0;
   const total = subtotal - discountAmount;
 
+  // Final guard: scrub any waitlisted city that may have slipped into the selection
+  // (shouldn't happen, but defensive — waitlisted entries MUST NOT enter payment flow)
+  const safeSelected = selected.filter((c) => availabilityMap[c.city] !== 'waitlisted');
+  if (safeSelected.length !== selected.length) {
+    showError('One of the selected cities is currently waitlisted. Please raise a request from that city instead.');
+    document.getElementById('cities').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
   const payload = {
     secret: 'LEAP_GB_2026',
+    type: 'register',
     timestamp: new Date().toISOString(),
     university_name: formData.get('university_name')?.trim(),
     representative_name: formData.get('representative_name')?.trim(),
@@ -243,12 +288,30 @@ form.addEventListener('submit', async (e) => {
 
   try {
     if (APPS_SCRIPT_URL) {
-      await fetch(APPS_SCRIPT_URL, {
+      const res = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Apps Script web apps require this when posting JSON
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload),
+        redirect: 'follow',
       });
+      const json = await res.json().catch(() => ({ status: 'ok' }));
+
+      if (json.status === 'unavailable') {
+        // Server-side revalidation rejected the booking — some city filled up
+        // while the user was filling the form. Re-fetch availability so badges update.
+        const blocked = (json.blocked || []).join(', ');
+        showError(
+          blocked
+            ? `These cities just reached full allocation: ${blocked}. Please reselect and try again.`
+            : 'One of the selected cities is no longer available. Please reselect.'
+        );
+        // Refresh availability hints
+        onCountryChange(currentCountry);
+        return;
+      }
+      if (json.status && json.status !== 'ok') {
+        throw new Error(json.message || 'Submission failed');
+      }
     } else {
       // No backend configured — simulate latency for preview
       await new Promise((r) => setTimeout(r, 900));
@@ -333,6 +396,8 @@ function escapeHtml(s) {
     labelEl.textContent = opt.querySelector('span:last-child').textContent;
     flagEl.textContent = opt.dataset.flag || '';
     root.classList.add('has-value');
+    // Notify the rest of the app (availability fetch)
+    hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
     close();
     trigger.focus();
   }
@@ -364,6 +429,166 @@ function escapeHtml(s) {
       next.focus();
     }
   });
+})();
+
+/* ──────────────────────────────
+   Pulse 2.0 particle wordmark
+   Particles scatter, fly into position spelling "PULSE 2.0",
+   then breathe subtly. Click canvas to replay.
+   ────────────────────────────── */
+(function initWordmark() {
+  const canvas = document.getElementById('pulse-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let parts = [], raf = null, W = 0, H = 0, DPR = 1, t0 = 0;
+
+  function build() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.width  = Math.max(1, Math.floor(canvas.clientWidth  * DPR));
+    H = canvas.height = Math.max(1, Math.floor(canvas.clientHeight * DPR));
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#000';
+    const fs = Math.min(W / 6.1, H * 0.66);
+    ctx.font = `700 ${fs}px 'Chakra Petch', sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('PULSE 2.0', W / 2, H / 2);
+
+    const data = ctx.getImageData(0, 0, W, H).data;
+    const step = Math.max(2, Math.round(2.1 * DPR));
+    const targets = [];
+    for (let y = 0; y < H; y += step) {
+      for (let x = 0; x < W; x += step) {
+        if (data[(y * W + x) * 4 + 3] > 130) targets.push([x, y]);
+      }
+    }
+    ctx.clearRect(0, 0, W, H);
+    parts = targets.map(([tx, ty]) => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      tx, ty,
+      hue: tx / W,
+      seed: Math.random() * Math.PI * 2,
+    }));
+  }
+
+  function frame(now) {
+    if (!t0) t0 = now;
+    const elapsed = now - t0;
+
+    // Phase 1: assembly (0 → 1700ms): particles fly to target
+    // Phase 2: handoff window (1700 → 2500ms): breathing offset ramps in via smoothstep
+    // Phase 3: settled: full breathing motion
+    const TRANSITION_START = 1700;
+    const TRANSITION_LENGTH = 800;
+    const ramp = Math.max(0, Math.min(1, (elapsed - TRANSITION_START) / TRANSITION_LENGTH));
+    const breathRamp = ramp * ramp * (3 - 2 * ramp); // smoothstep ease
+
+    ctx.clearRect(0, 0, W, H);
+    const sz = 1.7 * DPR;
+    const breathe = Math.sin(now * 0.0013);
+
+    for (const p of parts) {
+      const ox = Math.cos(now * 0.0011 + p.seed) * 1.1 * DPR * breathRamp;
+      const oy = Math.sin(now * 0.0013 + p.seed) * 1.1 * DPR * breathRamp;
+      p.x += ((p.tx + ox) - p.x) * 0.12;
+      p.y += ((p.ty + oy) - p.y) * 0.12;
+      // hero blue gradient: #2f5cff → #1b3aa6
+      const r = 47  - p.hue * 20;   // 47 → 27
+      const g = 92  - p.hue * 34;   // 92 → 58
+      const b = 255 - p.hue * 89;   // 255 → 166
+      const a = 0.92 + breathe * 0.07 * breathRamp;
+      ctx.fillStyle = `rgba(${r | 0},${g | 0},${b | 0},${a.toFixed(3)})`;
+      ctx.fillRect(p.x, p.y, sz, sz);
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function play() {
+    if (raf) cancelAnimationFrame(raf);
+    build();
+    for (const p of parts) { p.x = Math.random() * W; p.y = Math.random() * H; }
+    t0 = 0;
+    raf = requestAnimationFrame(frame);
+  }
+
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(play, 220); });
+  canvas.addEventListener('click', play);
+
+  // Boot once Chakra Petch is ready so the path-trace measures correctly
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => setTimeout(play, 100));
+  } else {
+    window.addEventListener('load', () => setTimeout(play, 250));
+  }
+})();
+
+/* ──────────────────────────────
+   Ambient drifting particles (hero background)
+   ────────────────────────────── */
+(function initAmbient() {
+  const c = document.getElementById('ambient-canvas');
+  if (!c) return;
+  const x = c.getContext('2d');
+  let w, h, dots;
+
+  function init() {
+    const rect = c.getBoundingClientRect();
+    w = c.width  = Math.max(1, rect.width);
+    h = c.height = Math.max(1, rect.height);
+    const n = Math.min(56, Math.round(rect.width / 28));
+    dots = Array.from({ length: n }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.4 + 0.5,
+      vy: Math.random() * 0.18 + 0.04,
+      vx: (Math.random() - 0.5) * 0.08,
+      a: Math.random() * 0.22 + 0.06,
+    }));
+  }
+
+  function loop() {
+    x.clearRect(0, 0, w, h);
+    for (const d of dots) {
+      d.y += d.vy;
+      d.x += d.vx;
+      if (d.y > h + 5) { d.y = -5; d.x = Math.random() * w; }
+      if (d.x < -5)  d.x = w + 5;
+      if (d.x > w + 5) d.x = -5;
+      x.beginPath();
+      x.fillStyle = `rgba(47,92,255,${d.a})`;
+      x.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      x.fill();
+    }
+    requestAnimationFrame(loop);
+  }
+
+  init();
+  loop();
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(init, 200); });
+})();
+
+/* ──────────────────────────────
+   Header: frosted state after scroll
+   ────────────────────────────── */
+(function initHeaderState() {
+  const header = document.getElementById('site-header');
+  if (!header) return;
+  let ticking = false;
+
+  function update() {
+    if (window.scrollY > 18) header.classList.add('is-scrolled');
+    else header.classList.remove('is-scrolled');
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  update();
 })();
 
 /* ──────────────────────────────
@@ -443,6 +668,241 @@ function escapeHtml(s) {
 
   targets.forEach((el) => observer.observe(el));
 })();
+
+/* ──────────────────────────────
+   City availability (Country + City)
+   ────────────────────────────── */
+const countryPrompt = document.getElementById('country-prompt');
+
+// Show / hide the "select country" hint based on country state.
+function setCountryPromptVisible(visible) {
+  if (!countryPrompt) return;
+  countryPrompt.classList.toggle('hidden', !visible);
+}
+
+// Wipe any selection of cities that are now waitlisted for the new country.
+function clearWaitlistedSelections() {
+  let changed = false;
+  cityCards.forEach((card) => {
+    if (card.classList.contains('is-waitlisted')) {
+      const checkbox = card.querySelector('.city-checkbox');
+      if (checkbox.checked) {
+        checkbox.checked = false;
+        card.classList.remove('is-selected');
+        changed = true;
+      }
+    }
+  });
+  if (changed) updateSummary();
+}
+
+function clearAvailabilityBadges() {
+  cityCards.forEach((card) => {
+    card.classList.remove('is-waitlisted');
+    const status = card.querySelector('.city-status');
+    if (status) {
+      status.classList.remove('is-available', 'is-waitlisted');
+      status.textContent = '';
+    }
+  });
+}
+
+function applyAvailability(map) {
+  availabilityMap = map || {};
+  cityCards.forEach((card) => {
+    const city = card.dataset.city;
+    const status = card.querySelector('.city-status');
+    const state = availabilityMap[city];
+
+    card.classList.remove('is-waitlisted');
+    if (status) {
+      status.classList.remove('is-available', 'is-waitlisted');
+      status.textContent = '';
+    }
+
+    if (state === 'available') {
+      status.classList.add('is-available');
+      status.textContent = 'Available';
+    } else if (state === 'waitlisted') {
+      status.classList.add('is-waitlisted');
+      status.textContent = 'Waitlisted';
+      card.classList.add('is-waitlisted');
+    }
+  });
+  clearWaitlistedSelections();
+}
+
+async function fetchAvailability(country) {
+  if (!country || !APPS_SCRIPT_URL) return null;
+  const url = `${APPS_SCRIPT_URL}?action=availability&country=${encodeURIComponent(country)}`;
+  try {
+    const res = await fetch(url, { method: 'GET', redirect: 'follow' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    return data.availability || {};
+  } catch (err) {
+    console.warn('[Pulse 2.0] availability fetch failed; continuing without badges', err);
+    return null;
+  }
+}
+
+async function onCountryChange(country) {
+  if (country === currentCountry) return;
+  currentCountry = country;
+
+  if (!country) {
+    clearAvailabilityBadges();
+    setCountryPromptVisible(true);
+    return;
+  }
+
+  setCountryPromptVisible(false);
+  // Mark the in-flight fetch so any rapid re-selection invalidates older responses.
+  const ticket = Symbol(country);
+  availabilityFetchInFlight = ticket;
+
+  const map = await fetchAvailability(country);
+  if (availabilityFetchInFlight !== ticket) return; // a newer country was chosen
+
+  if (map) applyAvailability(map);
+}
+
+// Wire to the hidden country input
+const countryInput = document.getElementById('country-input');
+if (countryInput) {
+  countryInput.addEventListener('change', () => onCountryChange(countryInput.value));
+  // initial state: no country picked yet
+  setCountryPromptVisible(true);
+}
+
+/* ──────────────────────────────
+   Waitlist modal
+   ────────────────────────────── */
+const waitlistModal      = document.getElementById('waitlist-modal');
+const waitlistForm       = document.getElementById('waitlist-form');
+const waitlistError      = document.getElementById('waitlist-error');
+const waitlistSuccess    = document.getElementById('waitlist-success');
+const waitlistSubmitBtn  = document.getElementById('waitlist-submit');
+const waitlistSubmitLbl  = document.getElementById('waitlist-submit-label');
+const waitlistSubmitArr  = document.getElementById('waitlist-submit-arrow');
+const waitlistSubmitSpin = document.getElementById('waitlist-submit-spinner');
+
+let waitlistLastTrigger = null;
+
+function openWaitlistModal({ country, city }) {
+  if (!waitlistModal) return;
+  waitlistLastTrigger = document.activeElement;
+
+  // Reset state
+  waitlistForm.reset();
+  waitlistForm.classList.remove('hidden');
+  waitlistSuccess.classList.add('hidden');
+  waitlistError.classList.add('hidden');
+
+  // Pre-fill from current selections, with sensible fallbacks
+  const univField  = form.querySelector('input[name="university_name"]');
+  const repField   = form.querySelector('input[name="representative_name"]');
+  const emailField = form.querySelector('input[name="email"]');
+  const phoneField = form.querySelector('input[name="whatsapp"]');
+
+  if (univField?.value)  waitlistForm.elements['university'].value = univField.value;
+  if (repField?.value)   waitlistForm.elements['name'].value       = repField.value;
+  if (emailField?.value) waitlistForm.elements['email'].value      = emailField.value;
+  if (phoneField?.value) waitlistForm.elements['phone'].value      = phoneField.value;
+
+  waitlistForm.elements['country'].value        = country || '';
+  waitlistForm.elements['preferred_city'].value = city || '';
+
+  waitlistModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+
+  // Focus the first editable field
+  setTimeout(() => waitlistForm.elements['name']?.focus(), 80);
+}
+
+function closeWaitlistModal() {
+  if (!waitlistModal) return;
+  waitlistModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (waitlistLastTrigger && typeof waitlistLastTrigger.focus === 'function') {
+    waitlistLastTrigger.focus();
+  }
+}
+
+if (waitlistModal) {
+  // Close on backdrop / close-button / cancel-button click
+  waitlistModal.addEventListener('click', (e) => {
+    if (e.target.closest('[data-waitlist-close]')) closeWaitlistModal();
+  });
+  // Close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && waitlistModal.getAttribute('aria-hidden') === 'false') {
+      closeWaitlistModal();
+    }
+  });
+}
+
+function setWaitlistSubmitting(loading) {
+  if (!waitlistSubmitBtn) return;
+  waitlistSubmitBtn.disabled = loading;
+  waitlistSubmitLbl.textContent = loading ? 'Submitting…' : 'Submit Request';
+  waitlistSubmitArr?.classList.toggle('hidden', loading);
+  waitlistSubmitSpin?.classList.toggle('hidden', !loading);
+}
+
+if (waitlistForm) {
+  waitlistForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    waitlistError.classList.add('hidden');
+
+    const fd = new FormData(waitlistForm);
+    const payload = {
+      secret: 'LEAP_GB_2026',
+      type: 'waitlist',
+      timestamp: new Date().toISOString(),
+      name: (fd.get('name') || '').toString().trim(),
+      email: (fd.get('email') || '').toString().trim(),
+      phone: (fd.get('phone') || '').toString().trim(),
+      university: (fd.get('university') || '').toString().trim(),
+      country: (fd.get('country') || '').toString().trim(),
+      preferred_city: (fd.get('preferred_city') || '').toString().trim(),
+      notes: (fd.get('notes') || '').toString().trim(),
+    };
+
+    // Light client-side validation
+    if (!payload.name || !payload.email || !payload.phone || !payload.university) {
+      waitlistError.textContent = 'Please fill in all required fields.';
+      waitlistError.classList.remove('hidden');
+      return;
+    }
+
+    setWaitlistSubmitting(true);
+    try {
+      if (APPS_SCRIPT_URL) {
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+          redirect: 'follow',
+        });
+        const json = await res.json().catch(() => ({ status: 'ok' }));
+        if (json.status !== 'ok') throw new Error(json.message || 'Submission failed');
+      } else {
+        await new Promise((r) => setTimeout(r, 700));
+        console.info('[Pulse 2.0] Waitlist preview (no APPS_SCRIPT_URL):', payload);
+      }
+      // Show success state
+      waitlistForm.classList.add('hidden');
+      waitlistSuccess.classList.remove('hidden');
+    } catch (err) {
+      console.error(err);
+      waitlistError.textContent = 'Something went wrong. Please try again or email mahafrish.doctor@geebeeworld.org.';
+      waitlistError.classList.remove('hidden');
+    } finally {
+      setWaitlistSubmitting(false);
+    }
+  });
+}
 
 /* ──────────────────────────────
    Initialise

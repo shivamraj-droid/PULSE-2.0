@@ -9,10 +9,10 @@
   <!-- Tailwind CDN (production-friendly: swap to compiled CSS at scale) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonts: Fraunces (editorial display) + Inter Tight (refined body) -->
+  <!-- Fonts: Fraunces (editorial display) + Inter Tight (refined body) + Chakra Petch (canvas wordmark) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600;700&family=Chakra+Petch:wght@600;700&family=Sora:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./styles.css" />
 
@@ -48,7 +48,7 @@
     }
   </script>
 </head>
-<body class="font-sans text-ink bg-white antialiased">
+<body class="font-sans text-ink antialiased">
 
   <!-- Scroll progress -->
   <div id="scroll-progress" aria-hidden="true"></div>
@@ -56,126 +56,114 @@
   <!-- ============================================================ -->
   <!-- HEADER                                                       -->
   <!-- ============================================================ -->
-  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/70">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 h-14 sm:h-16 lg:h-20 flex items-center justify-between">
-      <div class="flex items-center gap-3 min-w-0">
+  <header id="site-header" class="site-header sticky top-0 z-40">
+    <div class="site-header-inner max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 h-16 sm:h-18 lg:h-20 flex items-center justify-between">
+
+      <!-- Brand -->
+      <a href="#top" class="brand-mark flex items-center gap-3 min-w-0 group">
         <img
           id="brand-logo"
           src="./assets/leap-geebee-logo.png"
           alt="Leap GeeBee"
-          class="h-8 sm:h-10 lg:h-12 w-auto hidden"
+          class="h-8 sm:h-10 w-auto hidden"
           onload="this.classList.remove('hidden'); document.getElementById('brand-text').classList.add('hidden');"
           onerror="this.remove();"
         />
-        <span id="brand-text" class="font-display text-[1.2rem] sm:text-[1.35rem] tracking-tight text-ink font-medium">
-          Leap<span class="text-brand-600">GeeBee</span>
+        <span id="brand-text" class="brand-text-fallback">
+          Leap<span>GeeBee</span>
         </span>
-        <span class="hidden lg:inline-block h-5 w-px bg-slate-300 mx-2"></span>
-        <span class="hidden lg:inline-block text-sm text-slate-500 tracking-wide">Pulse 2.0 — 2026 Edition</span>
-      </div>
-      <nav class="hidden md:flex items-center gap-7 text-sm text-slate-600 font-medium">
-        <a href="#cities" class="hover:text-brand-600 transition">Cities</a>
-        <a href="#register" class="hover:text-brand-600 transition">Register</a>
-        <a href="mailto:mahafrish.doctor@geebeeworld.org" class="hover:text-brand-600 transition">Contact</a>
+        <span class="brand-divider hidden lg:inline-block"></span>
+        <span class="brand-meta hidden lg:inline-flex items-center gap-2">
+          <span class="brand-meta-pulse"></span>
+          Pulse 2.0 · 2026 Edition
+        </span>
+      </a>
+
+      <!-- Nav links (desktop) -->
+      <nav class="nav-mono hidden md:flex items-center gap-7">
+        <a href="#cities">Cities &amp; Dates</a>
+        <a href="#register">Register</a>
+        <a href="mailto:mahafrish.doctor@geebeeworld.org">Contact</a>
       </nav>
-      <a href="#register" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-white bg-ink hover:bg-brand-700 transition px-3.5 sm:px-4 py-2 sm:py-2 rounded-full whitespace-nowrap">
-        Reserve seat
-        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
+
+      <!-- CTA -->
+      <a href="#register" class="header-cta">
+        <span>Reserve seat</span>
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
       </a>
     </div>
+    <!-- Hairline gradient at the bottom, only shows after scroll -->
+    <div class="site-header-line"></div>
   </header>
 
   <!-- ============================================================ -->
-  <!-- HERO                                                          -->
+  <!-- HERO  (matches the pasted landing-page design)               -->
   <!-- ============================================================ -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-white to-white">
-    <!-- decorative gradient mesh -->
-    <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
-      <div class="orb-drift-a absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-brand-100/60 blur-3xl"></div>
-      <div class="orb-drift-b absolute top-20 right-0 w-[420px] h-[420px] rounded-full bg-brand-200/40 blur-3xl"></div>
-      <div class="absolute inset-0 opacity-[0.025]" style="background-image: radial-gradient(#0F172A 1px, transparent 1px); background-size: 22px 22px;"></div>
-    </div>
+  <section class="hero-shell relative overflow-hidden min-h-screen flex flex-col">
+    <!-- decorative layers (body already has the gradient; just the grid + ambient here) -->
+    <div aria-hidden="true" class="hero-grid absolute inset-0 pointer-events-none"></div>
+    <canvas id="ambient-canvas" class="absolute inset-0 w-full h-full opacity-80 pointer-events-none"></canvas>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-14 pb-10 sm:pt-24 sm:pb-14 lg:pt-32 lg:pb-16">
-      <div class="max-w-3xl">
-        <!-- Eyebrow -->
-        <div class="reveal inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-brand-100 shadow-sm">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-60"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-600"></span>
-          </span>
-          <span class="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-brand-700 font-semibold">Registration Open · 2026 Edition</span>
+    <div class="relative flex-1 w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-10 pb-8 sm:pt-14 sm:pb-10 flex flex-col items-center justify-center text-center">
+
+      <!-- Live badge -->
+      <span class="hero-badge reveal">
+        <span class="hero-badge-live"></span>
+        Registration Open · 2026 Edition
+      </span>
+
+      <!-- Wordmark canvas (animated particles spell "PULSE 2.0") -->
+      <h1 class="reveal mt-5 sm:mt-7 w-full max-w-5xl">
+        <span class="sr-only">Pulse 2.0.</span>
+        <div class="wordmark">
+          <canvas id="pulse-canvas"></canvas>
         </div>
+      </h1>
 
-        <h1 class="reveal mt-6 sm:mt-8 font-display text-[2.6rem] sm:text-6xl lg:text-[4.75rem] leading-[1.02] tracking-tight text-ink font-medium">
-          Pulse <span class="text-brand-600">2.0</span><span class="text-slate-400">.</span>
-          <span class="block mt-3 sm:mt-4 font-sans font-normal text-slate-600 text-lg sm:text-xl lg:text-2xl tracking-normal leading-snug">India's premier study abroad partner roadshow.</span>
-        </h1>
+      <!-- Tagline with gradient accent -->
+      <h2 class="hero-tagline reveal">
+        India's premier study abroad <span class="hero-tagline-accent">partner roadshow</span>.
+      </h2>
 
-        <p class="reveal mt-6 sm:mt-7 text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl leading-relaxed">
-          Reserve your university's participation across curated Indian cities and build meaningful partnerships with the country's leading study abroad consulting ecosystem.
-        </p>
+      <!-- Lede -->
+      <p class="hero-lede reveal">
+        Reserve your university's participation across curated Indian cities and build meaningful
+        partnerships with the country's leading study abroad consulting ecosystem.
+      </p>
 
-        <div class="reveal mt-8 sm:mt-9 flex flex-wrap gap-3 text-sm sm:text-base">
-          <a href="#register" class="cta-shimmer inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition shadow-[0_12px_36px_-10px_rgba(37,99,235,0.55)]">
-            Begin Registration
-            <svg class="w-4 h-4 sm:w-4 sm:h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
-          </a>
-          <a href="#cities" class="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-brand-300 text-ink font-medium px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition">
-            View Cities &amp; Dates
-          </a>
-        </div>
-
-        <!-- Meta line -->
-        <div class="reveal mt-9 sm:mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs sm:text-sm text-slate-500">
-          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0V11.25h18v7.5"/></svg>July – August 2026</span>
-          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>7 Cities Across India</span>
-          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>500+ Consulting Providers</span>
-        </div>
+      <!-- CTAs -->
+      <div class="reveal mt-8 flex flex-wrap justify-center gap-3">
+        <a href="#register" class="btn btn-primary cta-shimmer">
+          Begin Registration
+          <span class="arr">→</span>
+        </a>
+        <a href="#cities" class="btn btn-ghost">
+          View Cities &amp; Dates
+        </a>
       </div>
 
-      <!-- Trust badges card row -->
-      <div class="reveal anim-stagger mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl">
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-card">
-          <div class="flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-brand-50 grid place-items-center text-brand-700 font-display font-medium text-lg">7</div>
-            <div>
-              <div class="text-sm sm:text-[15px] font-semibold text-ink">Curated Cities</div>
-              <div class="text-xs sm:text-[13px] text-slate-500 mt-0.5">Hand-picked across India</div>
-            </div>
-          </div>
+      <!-- Stat strip — sits directly below the CTAs -->
+      <section class="hero-stats reveal mt-10 sm:mt-12">
+        <div class="hero-stat">
+          <div class="hero-stat-num">July – August <b>2026</b></div>
+          <div class="hero-stat-lab">Roadshow Window</div>
         </div>
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-card">
-          <div class="flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-brand-50 grid place-items-center text-brand-700 font-display font-medium text-base">500+</div>
-            <div>
-              <div class="text-sm sm:text-[15px] font-semibold text-ink">Partner Network</div>
-              <div class="text-xs sm:text-[13px] text-slate-500 mt-0.5">Consulting providers expected</div>
-            </div>
-          </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num"><b>7</b> Cities</div>
+          <div class="hero-stat-lab">Across India</div>
         </div>
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-card">
-          <div class="flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-brand-50 grid place-items-center text-brand-700">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            </div>
-            <div>
-              <div class="text-sm sm:text-[15px] font-semibold text-ink">First-Come Basis</div>
-              <div class="text-xs sm:text-[13px] text-slate-500 mt-0.5">Limited booth allocations</div>
-            </div>
-          </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">Now <b>Open</b></div>
+          <div class="hero-stat-lab">University Registration</div>
         </div>
-      </div>
+      </section>
     </div>
-
-    <!-- subtle bottom fade -->
-    <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
   </section>
 
   <!-- ============================================================ -->
   <!-- FORM + CITY SELECTION + SUMMARY                              -->
   <!-- ============================================================ -->
-  <main id="register" class="relative bg-paper">
+  <main id="register" class="relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-10 pb-14 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
 
       <!-- section heading -->
@@ -260,6 +248,10 @@
                 <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-[0.12em]">Multi-select</div>
               </div>
               <p class="text-sm text-slate-500 mt-3">Select one or more cities. Book three or more to unlock a 10% partner discount.</p>
+              <div id="country-prompt" class="country-prompt mt-4 hidden">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><circle cx="12" cy="16" r="0.5"/></svg>
+                <span>Select your country above to check city availability.</span>
+              </div>
             </header>
 
             <!-- Flagship -->
@@ -280,6 +272,7 @@
                 <label class="city-card" data-city="Hyderabad" data-price="700" data-type="flagship">
                   <input type="checkbox" class="city-checkbox" />
                   <div class="city-card-inner">
+                    <span class="city-status" aria-live="polite"></span>
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">17 July 2026</div>
@@ -291,12 +284,14 @@
                       <span class="city-type">Flagship Event</span>
                       <span class="city-price">USD 700</span>
                     </div>
+                    <button type="button" class="city-waitlist-cta" tabindex="-1">Raise Request <span aria-hidden="true">→</span></button>
                   </div>
                 </label>
 
                 <label class="city-card" data-city="Ahmedabad" data-price="700" data-type="flagship">
                   <input type="checkbox" class="city-checkbox" />
                   <div class="city-card-inner">
+                    <span class="city-status" aria-live="polite"></span>
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">25 July 2026</div>
@@ -308,12 +303,14 @@
                       <span class="city-type">Flagship Event</span>
                       <span class="city-price">USD 700</span>
                     </div>
+                    <button type="button" class="city-waitlist-cta" tabindex="-1">Raise Request <span aria-hidden="true">→</span></button>
                   </div>
                 </label>
 
                 <label class="city-card" data-city="Delhi" data-price="700" data-type="flagship">
                   <input type="checkbox" class="city-checkbox" />
                   <div class="city-card-inner">
+                    <span class="city-status" aria-live="polite"></span>
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">31 July 2026</div>
@@ -325,12 +322,14 @@
                       <span class="city-type">Flagship Event</span>
                       <span class="city-price">USD 700</span>
                     </div>
+                    <button type="button" class="city-waitlist-cta" tabindex="-1">Raise Request <span aria-hidden="true">→</span></button>
                   </div>
                 </label>
 
                 <label class="city-card" data-city="Chandigarh" data-price="700" data-type="flagship">
                   <input type="checkbox" class="city-checkbox" />
                   <div class="city-card-inner">
+                    <span class="city-status" aria-live="polite"></span>
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">12 August 2026</div>
@@ -342,6 +341,7 @@
                       <span class="city-type">Flagship Event</span>
                       <span class="city-price">USD 700</span>
                     </div>
+                    <button type="button" class="city-waitlist-cta" tabindex="-1">Raise Request <span aria-hidden="true">→</span></button>
                   </div>
                 </label>
               </div>
@@ -369,6 +369,7 @@
                 <label class="city-card" data-city="Chennai" data-price="500" data-type="spotlight">
                   <input type="checkbox" class="city-checkbox" />
                   <div class="city-card-inner">
+                    <span class="city-status" aria-live="polite"></span>
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">5 August 2026</div>
@@ -380,12 +381,14 @@
                       <span class="city-type">Spotlight Session</span>
                       <span class="city-price">USD 500</span>
                     </div>
+                    <button type="button" class="city-waitlist-cta" tabindex="-1">Raise Request <span aria-hidden="true">→</span></button>
                   </div>
                 </label>
 
                 <label class="city-card" data-city="Vijayawada" data-price="500" data-type="spotlight">
                   <input type="checkbox" class="city-checkbox" />
                   <div class="city-card-inner">
+                    <span class="city-status" aria-live="polite"></span>
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">7 August 2026</div>
@@ -397,12 +400,14 @@
                       <span class="city-type">Spotlight Session</span>
                       <span class="city-price">USD 500</span>
                     </div>
+                    <button type="button" class="city-waitlist-cta" tabindex="-1">Raise Request <span aria-hidden="true">→</span></button>
                   </div>
                 </label>
 
                 <label class="city-card sm:col-span-2" data-city="Pune" data-price="500" data-type="spotlight">
                   <input type="checkbox" class="city-checkbox" />
                   <div class="city-card-inner">
+                    <span class="city-status" aria-live="polite"></span>
                     <div class="flex items-start justify-between">
                       <div>
                         <div class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-slate-400 font-medium">21 August 2026</div>
@@ -414,6 +419,7 @@
                       <span class="city-type">Spotlight Session</span>
                       <span class="city-price">USD 500</span>
                     </div>
+                    <button type="button" class="city-waitlist-cta" tabindex="-1">Raise Request <span aria-hidden="true">→</span></button>
                   </div>
                 </label>
               </div>
@@ -571,7 +577,7 @@
   <!-- ============================================================ -->
   <!-- GLIMPSES — Pulse 1.0 marquee                                 -->
   <!-- ============================================================ -->
-  <section id="glimpses" class="relative bg-white border-t border-slate-200/70">
+  <section id="glimpses" class="relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-12 sm:pt-20 pb-8 sm:pb-12">
       <div class="anim text-center">
         <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-brand-600 font-semibold">Looking Back</span>
@@ -620,11 +626,9 @@
           </ul>
         </div>
         <div>
-          <div class="text-[11px] uppercase tracking-[0.2em] text-white/40 font-semibold">Event</div>
+          <div class="text-[11px] uppercase tracking-[0.2em] text-white/40 font-semibold">Organiser</div>
           <ul class="mt-4 space-y-2 text-sm text-white/70">
-            <li>Pulse 2.0 — 2026 Edition</li>
-            <li>July–August 2026 · 7 Cities</li>
-            <li>India</li>
+            <li>Leap GeeBee · India</li>
           </ul>
         </div>
       </div>
@@ -634,6 +638,76 @@
       </div>
     </div>
   </footer>
+
+  <!-- ============================================================ -->
+  <!-- WAITLIST MODAL                                               -->
+  <!-- ============================================================ -->
+  <div id="waitlist-modal" class="waitlist-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="waitlist-title">
+    <div class="waitlist-backdrop" data-waitlist-close></div>
+    <div class="waitlist-panel" role="document">
+      <button type="button" class="waitlist-close" aria-label="Close" data-waitlist-close>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="waitlist-header">
+        <span class="waitlist-eyebrow">Waitlist · By invitation</span>
+        <h3 id="waitlist-title" class="waitlist-title">Raise a waitlist request</h3>
+        <p class="waitlist-sub">This city has reached its current allocation. Share a few details and our team will personally review availability and reach out to you.</p>
+      </div>
+
+      <form id="waitlist-form" class="waitlist-form" novalidate>
+        <div class="waitlist-grid">
+          <div>
+            <label class="waitlist-label">Full Name</label>
+            <input required name="name" type="text" placeholder="Full name" class="form-input" />
+          </div>
+          <div>
+            <label class="waitlist-label">University Name</label>
+            <input required name="university" type="text" placeholder="e.g. University of Edinburgh" class="form-input" />
+          </div>
+          <div>
+            <label class="waitlist-label">Email Address</label>
+            <input required name="email" type="email" placeholder="name@university.edu" class="form-input" />
+          </div>
+          <div>
+            <label class="waitlist-label">Phone Number</label>
+            <input required name="phone" type="tel" placeholder="+44 20 1234 5678" class="form-input" />
+          </div>
+          <div>
+            <label class="waitlist-label">Country</label>
+            <input name="country" type="text" readonly class="form-input is-readonly" />
+          </div>
+          <div>
+            <label class="waitlist-label">Preferred City</label>
+            <input name="preferred_city" type="text" readonly class="form-input is-readonly" />
+          </div>
+          <div class="waitlist-grid-full">
+            <label class="waitlist-label">Additional Notes <span class="waitlist-label-opt">(optional)</span></label>
+            <textarea name="notes" rows="3" placeholder="Anything we should know — preferred dates, alternate cities, scale of representation, etc." class="form-input"></textarea>
+          </div>
+        </div>
+
+        <div class="waitlist-actions">
+          <button type="button" class="btn btn-ghost waitlist-secondary" data-waitlist-close>Cancel</button>
+          <button type="submit" class="btn btn-primary cta-shimmer" id="waitlist-submit">
+            <span id="waitlist-submit-label">Submit Request</span>
+            <span class="arr" id="waitlist-submit-arrow">→</span>
+            <svg id="waitlist-submit-spinner" class="hidden animate-spin" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
+          </button>
+        </div>
+        <p id="waitlist-error" class="waitlist-error hidden"></p>
+      </form>
+
+      <div id="waitlist-success" class="waitlist-success hidden">
+        <div class="waitlist-success-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h4 class="waitlist-success-title">Request received</h4>
+        <p class="waitlist-success-sub">Our team will review availability and reach out to you shortly with next steps.</p>
+        <button type="button" class="btn btn-primary cta-shimmer" data-waitlist-close>Close</button>
+      </div>
+    </div>
+  </div>
 
   <script src="./app.js"></script>
 </body>
