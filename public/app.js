@@ -476,23 +476,23 @@ function escapeHtml(s) {
     if (!t0) t0 = now;
     const elapsed = now - t0;
 
-    // Phase 1: assembly (0 → 1700ms): particles fly to target
-    // Phase 2: handoff window (1700 → 2500ms): breathing offset ramps in via smoothstep
-    // Phase 3: settled: full breathing motion
-    const TRANSITION_START = 1700;
-    const TRANSITION_LENGTH = 800;
+    // Phase 1: assembly (0 → 2600ms): particles fly to target  (slower for premium feel)
+    // Phase 2: handoff window (2600 → 3700ms): breathing offset ramps in via smoothstep
+    // Phase 3: settled: gentle breathing motion
+    const TRANSITION_START = 2600;
+    const TRANSITION_LENGTH = 1100;
     const ramp = Math.max(0, Math.min(1, (elapsed - TRANSITION_START) / TRANSITION_LENGTH));
     const breathRamp = ramp * ramp * (3 - 2 * ramp); // smoothstep ease
 
     ctx.clearRect(0, 0, W, H);
     const sz = 1.7 * DPR;
-    const breathe = Math.sin(now * 0.0013);
+    const breathe = Math.sin(now * 0.00075);
 
     for (const p of parts) {
-      const ox = Math.cos(now * 0.0011 + p.seed) * 1.1 * DPR * breathRamp;
-      const oy = Math.sin(now * 0.0013 + p.seed) * 1.1 * DPR * breathRamp;
-      p.x += ((p.tx + ox) - p.x) * 0.12;
-      p.y += ((p.ty + oy) - p.y) * 0.12;
+      const ox = Math.cos(now * 0.0006 + p.seed) * 1.1 * DPR * breathRamp;
+      const oy = Math.sin(now * 0.00075 + p.seed) * 1.1 * DPR * breathRamp;
+      p.x += ((p.tx + ox) - p.x) * 0.065;
+      p.y += ((p.ty + oy) - p.y) * 0.065;
       // hero blue gradient: #2f5cff → #1b3aa6
       const r = 47  - p.hue * 20;   // 47 → 27
       const g = 92  - p.hue * 34;   // 92 → 58
